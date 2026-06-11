@@ -1,35 +1,27 @@
 const { Pool } = require('pg');
 require('dotenv').config();
 
-// Configuração do banco de dados
 const pool = new Pool({
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT || 5432,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    ssl: false,  // Desativa SSL temporariamente
+    connectionString: `postgresql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`,
+    ssl: { rejectUnauthorized: false },
     connectionTimeoutMillis: 10000,
 });
 
-// Testar conexão
 async function testConnection() {
     try {
         const client = await pool.connect();
         await client.query('SELECT NOW()');
         client.release();
-        console.log('✅ Banco de dados conectado com sucesso!');
+        console.log('✅ Banco conectado!');
         return true;
     } catch (error) {
-        console.error('❌ Erro ao conectar ao banco de dados:', error.message);
+        console.error('❌ Erro:', error.message);
         return false;
     }
 }
 
-// Inicializar tabelas
 async function initDatabase() {
     try {
-        // Tabela de usuários
         await pool.query(`
             CREATE TABLE IF NOT EXISTS users (
                 id SERIAL PRIMARY KEY,
@@ -42,9 +34,7 @@ async function initDatabase() {
                 created_at TIMESTAMP DEFAULT NOW()
             )
         `);
-        console.log('✅ Tabela users verificada/criada');
         
-        // Tabela de blog_posts
         await pool.query(`
             CREATE TABLE IF NOT EXISTS blog_posts (
                 id SERIAL PRIMARY KEY,
@@ -59,26 +49,20 @@ async function initDatabase() {
                 created_at TIMESTAMP DEFAULT NOW()
             )
         `);
-        console.log('✅ Tabela blog_posts verificada/criada');
         
-        // Verificar se admin existe
         const adminCheck = await pool.query('SELECT * FROM users WHERE email = $1', ['admin@winbets.com']);
-        
         if (adminCheck.rows.length === 0) {
             const bcrypt = require('bcryptjs');
             const hashedPassword = await bcrypt.hash('Admin123456', 10);
-            
             await pool.query(
                 `INSERT INTO users (name, email, password, is_admin, balance)
                  VALUES ($1, $2, $3, $4, $5)`,
                 ['Administrador', 'admin@winbets.com', hashedPassword, true, 0]
             );
-            console.log('✅ Usuário admin criado');
         }
-        
-        console.log('✅ Banco de dados inicializado com sucesso!');
+        console.log('✅ Banco inicializado');
     } catch (error) {
-        console.error('❌ Erro ao inicializar banco de dados:', error);
+        console.error('Erro:', error);
     }
 }
 
