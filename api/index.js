@@ -9,65 +9,41 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// ============================================
-// CONFIGURAÇÕES DE SEGURANÇA
-// ============================================
-
-// CORS
-app.use(cors({
-    origin: ['http://localhost:3000', 'http://localhost:5500', 'http://127.0.0.1:5500'],
-    credentials: true
-}));
-
-// Segurança
-app.use(helmet({
-    contentSecurityPolicy: false,
-}));
-
-// Compressão
+// Configurações
+app.use(cors());
+app.use(helmet({ contentSecurityPolicy: false }));
 app.use(compression());
-
-// Parse JSON
 app.use(express.json({ limit: '10mb' }));
 
-// Rate limiting (protege contra ataques de força bruta)
+// Rate limiting
 const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutos
-    max: 100, // 100 requisições por IP
+    windowMs: 15 * 60 * 1000,
+    max: 100,
     message: { error: 'Muitas requisições. Tente novamente mais tarde.' }
 });
 app.use('/api/', limiter);
 
-// ============================================
-// IMPORTAR ROTAS
-// ============================================
-
+// Rotas
 const authHandler = require('./auth');
 const usersHandler = require('./users');
 const blogHandler = require('./blog');
 const adminHandler = require('./admin');
 
-// ============================================
-// ROTAS DA API
-// ============================================
-
-// Rotas de autenticação
 app.use('/api/auth', authHandler);
-
-// Rotas de usuários
 app.use('/api/users', usersHandler);
-
-// Rotas de blog
 app.use('/api/blog', blogHandler);
-
-// Rotas administrativas
 app.use('/api/admin', adminHandler);
 
-// ============================================
-// ROTAS DE APIS EXISTENTES (MANTIDAS)
-// ============================================
+// Rota de saúde (health check)
+app.get('/api/health', (req, res) => {
+    res.json({
+        status: 'online',
+        timestamp: new Date().toISOString(),
+        database: 'connected'
+    });
+});
 
-// API de Futebol
+// Rota de futebol
 app.get('/api/football', async (req, res) => {
     try {
         const fetch = require('node-fetch');
@@ -94,16 +70,7 @@ app.get('/api/football', async (req, res) => {
     }
 });
 
-// Rota de saúde da API
-app.get('/api/health', (req, res) => {
-    res.json({
-        status: 'online',
-        timestamp: new Date().toISOString(),
-        database: pool.totalCount ? 'connected' : 'pending'
-    });
-});
-
-// Rota padrão para rotas não encontradas
+// Rota padrão
 app.use('*', (req, res) => {
     res.status(404).json({ error: 'Rota não encontrada' });
 });
@@ -114,30 +81,20 @@ app.use((err, req, res, next) => {
     res.status(500).json({ error: 'Erro interno do servidor' });
 });
 
-// ============================================
-// INICIAR SERVIDOR
-// ============================================
-
+// Iniciar servidor
 async function startServer() {
     console.log('\n🚀 Iniciando servidor WIN BETS...\n');
     
-    // Testar conexão com banco de dados
     const dbConnected = await testConnection();
-    
     if (dbConnected) {
         await initDatabase();
     } else {
-        console.log('⚠️ Banco de dados não conectado. Algumas funcionalidades podem não funcionar.');
+        console.log('⚠️ Banco de dados não conectado.');
     }
     
     app.listen(PORT, () => {
-        console.log(`\n✅ Servidor rodando em http://localhost:${PORT}`);
-        console.log(`📋 API disponível em http://localhost:${PORT}/api/health`);
-        console.log('\n🔐 Credenciais Admin padrão:');
-        console.log('   Email: admin@winbets.com');
-        console.log('   Senha: Admin123456\n');
+        console.log(`\n✅ Servidor rodando na porta ${PORT}`);
     });
 }
 
-// Iniciar
 startServer();
