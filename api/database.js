@@ -8,15 +8,16 @@ const pool = new Pool({
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    ssl: {
-        rejectUnauthorized: false
-    }
+    ssl: false,  // Desativa SSL temporariamente
+    connectionTimeoutMillis: 10000,
 });
 
 // Testar conexão
 async function testConnection() {
     try {
-        await pool.query('SELECT NOW()');
+        const client = await pool.connect();
+        await client.query('SELECT NOW()');
+        client.release();
         console.log('✅ Banco de dados conectado com sucesso!');
         return true;
     } catch (error) {
@@ -73,19 +74,6 @@ async function initDatabase() {
                 ['Administrador', 'admin@winbets.com', hashedPassword, true, 0]
             );
             console.log('✅ Usuário admin criado');
-        }
-        
-        // Verificar se há posts de exemplo
-        const postsCheck = await pool.query('SELECT COUNT(*) FROM blog_posts');
-        
-        if (parseInt(postsCheck.rows[0].count) === 0) {
-            await pool.query(`
-                INSERT INTO blog_posts (title, excerpt, content, author, category, published)
-                VALUES 
-                ('Bem-vindo ao WIN BETS', 'A melhor plataforma de apostas esportivas com IA', 'Conteúdo completo...', 'WIN BETS Team', 'noticias', true),
-                ('Como começar a apostar', 'Guia completo para iniciantes', 'Conteúdo completo...', 'WIN BETS Team', 'guias', true)
-            `);
-            console.log('✅ Posts de exemplo criados');
         }
         
         console.log('✅ Banco de dados inicializado com sucesso!');
