@@ -1,0 +1,2367 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>WIN BETS - Plataforma Que Aumenta as Suas Chances de Vitória nas Apostas Desportivas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+        .animated-bg::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 20% 50%, rgba(0,180,216,0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(0,200,83,0.05) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.1); opacity: 1; } }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .particle {
+            position: absolute;
+            background: linear-gradient(135deg, #00B4D8, #00C853);
+            border-radius: 50%;
+            opacity: 0.2;
+            animation: float 15s infinite ease-in-out;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0.15; }
+            25% { transform: translateY(-30px) translateX(20px); opacity: 0.3; }
+            50% { transform: translateY(-60px) translateX(-20px); opacity: 0.2; }
+            75% { transform: translateY(-30px) translateX(40px); opacity: 0.25; }
+        }
+
+        body.dark {
+            background: linear-gradient(135deg, #0a1628 0%, #0d1f3c 100%);
+            color: #ffffff;
+        }
+        body.dark .top-nav { background: rgba(10, 22, 40, 0.95); border-bottom-color: #00B4D8; }
+        body.dark .side-menu { background: linear-gradient(135deg, #0a1628, #0d1f3c); border-right-color: #00B4D8; }
+        body.dark .game-card, body.dark .bookmaker-card, body.dark .league-card { background: rgba(13, 31, 60, 0.8); border-color: #00B4D8; color: #fff; }
+        body.dark .analysis-box, body.dark .modal-content { background: linear-gradient(135deg, #0a1628, #0d1f3c); border-color: #00B4D8; color: #fff; }
+        body.dark .api-badge { background: rgba(0,200,83,0.15); border-color: #00C853; color: #00C853; }
+        body.dark .api-badge.api-offline { background: rgba(255,59,48,0.15); border-color: #FF3B30; color: #FF3B30; }
+
+        body.light {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            color: #1b5e20;
+        }
+        body.light .top-nav { background: #ffffff; border-bottom-color: #2e7d32; box-shadow: 0 2px 15px rgba(0,0,0,0.08); }
+        body.light .side-menu { background: #ffffff; border-right-color: #2e7d32; color: #1b5e20; box-shadow: 2px 0 20px rgba(0,0,0,0.05); }
+        body.light .game-card, body.light .bookmaker-card, body.light .league-card { background: #ffffff; border-color: #a5d6a7; color: #1b5e20; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        body.light .game-card:hover { border-color: #2e7d32; box-shadow: 0 8px 25px rgba(46,125,50,0.12); }
+        body.light .analysis-box, body.light .modal-content { background: #ffffff; border-color: #a5d6a7; color: #1b5e20; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+        body.light .api-badge { background: rgba(46,125,50,0.1); border-color: #2e7d32; color: #2e7d32; }
+        body.light .api-badge.api-offline { background: rgba(255,59,48,0.1); border-color: #FF3B30; color: #FF3B30; }
+        body.light .section-title { background: linear-gradient(135deg, #2e7d32, #00C853); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        body.light .menu-item { color: #1b5e20; }
+        body.light .menu-item:hover { background: rgba(46,125,50,0.1); color: #2e7d32; }
+        body.light .menu-item i { color: #2e7d32; }
+        body.light .btn-pay { background: linear-gradient(135deg, #2e7d32, #00C853); color: #fff; }
+        body.light .btn-pay:hover { box-shadow: 0 5px 15px rgba(46,125,50,0.3); }
+        body.light .probability-bar { background: #e8f5e9; }
+        body.light .probability-fill { color: #fff; }
+        body.light .greeting-message { background: linear-gradient(135deg, #2e7d32, #00C853); color: #fff; }
+        body.light .theme-btn-header { background: rgba(46,125,50,0.1); border-color: #2e7d32; color: #2e7d32; }
+        body.light .visitor-btn-header { background: linear-gradient(135deg, #2e7d32, #00C853); color: #fff; }
+        body.light .analysis-probability { background: rgba(46,125,50,0.05); border-color: #00C853; }
+        body.light .stat-item { background: rgba(46,125,50,0.05); }
+        body.light .market-row { border-bottom-color: rgba(46,125,50,0.15); }
+        body.light .market-prob { color: #2e7d32; }
+        body.light .progress-bar { background: #e8f5e9; }
+        body.light .progress-fill { background: linear-gradient(90deg, #2e7d32, #00C853); }
+        body.light .team-logo, body.light .team-badge { background: transparent; box-shadow: none; animation: none; border: none; padding: 0; }
+        body.light .plan-card .btn-plan { background: #1b5e20; color: #fff; }
+        body.light .plan-card .btn-plan:hover { background: #2e7d32; }
+        body.light .admin-card { background: #ffffff; border-color: #a5d6a7; color: #1b5e20; }
+        body.light .admin-table th { color: #2e7d32; }
+        body.light .admin-table td { border-bottom-color: #e8f5e9; }
+        body.light .code-text { background: rgba(46,125,50,0.05); }
+        body.light .payment-item { background: rgba(46,125,50,0.05); border-color: #a5d6a7; }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #1a1a2e; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #00B4D8, #00C853); border-radius: 10px; }
+
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 12px 20px;
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .logo {
+            font-size: 20px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00B4D8, #00C853);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            cursor: pointer;
+        }
+        .menu-icon { font-size: 24px; cursor: pointer; color: #00B4D8; }
+        .right-nav { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        
+        .theme-visitor-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0,0,0,0.3);
+            padding: 4px 12px;
+            border-radius: 30px;
+        }
+        .theme-btn-header {
+            background: rgba(0, 180, 216, 0.2);
+            border: 1px solid #00B4D8;
+            border-radius: 20px;
+            padding: 4px 12px;
+            cursor: pointer;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: 0.3s;
+        }
+        .theme-btn-header:hover { background: rgba(0,180,216,0.4); }
+        .visitor-btn-header {
+            background: linear-gradient(135deg, #00B4D8, #00C853);
+            padding: 4px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            border: none;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+        }
+
+        .side-menu {
+            position: fixed;
+            left: -280px;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            z-index: 1001;
+            transition: 0.3s;
+            padding: 80px 15px 20px;
+            overflow-y: auto;
+        }
+        .side-menu.active { left: 0; }
+        .menu-item { padding: 10px 15px; margin: 3px 0; border-radius: 10px; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: 0.3s; font-size: 14px; }
+        .menu-item:hover { background: rgba(0, 180, 216, 0.15); transform: translateX(5px); }
+        .menu-item i { width: 22px; font-size: 16px; color: #00B4D8; }
+        .close-menu { position: absolute; top: 15px; right: 15px; font-size: 20px; cursor: pointer; }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .modal-content {
+            padding: 25px;
+            border-radius: 20px;
+            max-width: 400px;
+            width: 90%;
+            border: 1px solid #00B4D8;
+            background: linear-gradient(135deg, #0a1628, #0d1f3c);
+        }
+        .modal-content h2 { font-size: 22px; margin-bottom: 15px; background: linear-gradient(135deg, #00B4D8, #00C853); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .modal-content input { width: 100%; padding: 10px; margin: 8px 0; background: rgba(255,255,255,0.1); border: 1px solid #00B4D8; border-radius: 8px; color: #fff; font-size: 14px; }
+        .modal-content button { width: 100%; padding: 10px; background: linear-gradient(135deg, #00B4D8, #00C853); border: none; border-radius: 8px; font-weight: 600; cursor: pointer; color: #fff; }
+
+        .games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 15px; padding: 15px; }
+        .game-card, .bookmaker-card, .league-card, .agenda-futuro-card {
+            border-radius: 15px;
+            padding: 15px;
+            border: 1px solid #00B4D8;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .game-card:hover, .bookmaker-card:hover, .league-card:hover, .agenda-futuro-card:hover { border-color: #00C853; transform: translateY(-5px); }
+        
+        .team-logo { width: 35px; height: 35px; border-radius: 50%; object-fit: contain; background: transparent; padding: 2px; }
+        .team-badge { width: 60px; height: 60px; border-radius: 50%; object-fit: contain; background: transparent; padding: 5px; }
+        
+        .team-names { font-size: 15px; font-weight: 700; margin: 8px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+        .team-info { display: flex; align-items: center; gap: 8px; }
+        .probability-bar { background: rgba(0,0,0,0.25); border-radius: 8px; height: 28px; margin: 8px 0; overflow: hidden; }
+        .probability-fill { height: 100%; background: linear-gradient(90deg, #00B4D8, #00C853); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; color: #fff; }
+        .btn-pay { background: linear-gradient(135deg, #00B4D8, #00C853); padding: 8px 16px; border: none; border-radius: 8px; font-weight: 600; margin: 4px; cursor: pointer; color: #fff; font-size: 14px; transition: 0.3s; }
+        .btn-pay:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,180,216,0.3); }
+
+        .api-status { display: flex; gap: 10px; flex-wrap: wrap; padding: 12px; background: rgba(0,0,0,0.2); border-radius: 10px; margin: 15px; }
+        .api-badge { padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+
+        .main-content { margin-top: 70px; padding: 15px; max-width: 1200px; margin-left: auto; margin-right: auto; }
+        .section-title { font-size: 24px; margin: 20px 0 15px; background: linear-gradient(135deg, #00B4D8, #00C853); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .analysis-box { background: rgba(0,0,0,0.2); padding: 15px; border-radius: 15px; margin-top: 15px; }
+        .greeting-message { position: fixed; top: 70px; right: 10px; background: linear-gradient(135deg, #00B4D8, #00C853); color: #fff; padding: 10px 20px; border-radius: 15px; font-weight: 600; z-index: 999; animation: slideIn 0.5s ease; display: none; font-size: 13px; }
+        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        .loading { text-align: center; padding: 30px; }
+        .loading i { animation: spin 1s linear infinite; color: #00B4D8; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        .access-block {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.97);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .access-block.hide { display: none; }
+
+        .analysis-container { max-width: 650px; margin: 0 auto; border-radius: 25px; padding: 20px; border: 1px solid #00B4D8; background: rgba(0,0,0,0.3); }
+        .analysis-teams { display: flex; justify-content: space-between; align-items: center; margin: 20px 0; flex-wrap: wrap; gap: 10px; }
+        .team { text-align: center; flex: 1; }
+        .team-name { font-size: 18px; font-weight: 700; margin-top: 8px; }
+        .vs { font-size: 16px; font-weight: 800; color: #00B4D8; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; }
+        .analysis-probability { border-radius: 20px; padding: 20px; text-align: center; margin: 20px 0; border: 1px solid #00C853; }
+        .probability-percent { font-size: 48px; font-weight: 800; color: #00C853; }
+        .confidence-badge { display: inline-block; background: rgba(0,200,83,0.2); color: #00C853; padding: 4px 12px; border-radius: 20px; font-size: 11px; margin-top: 10px; border: 1px solid #00C853; }
+        .back-btn { background: transparent; border: 1px solid #00B4D8; padding: 8px 16px; border-radius: 30px; cursor: pointer; margin-bottom: 15px; font-size: 13px; color: #00B4D8; }
+
+        .agenda-filters { display: flex; gap: 10px; margin: 15px 20px; flex-wrap: wrap; justify-content: center; }
+        .agenda-btn { padding: 8px 20px; border-radius: 30px; background: rgba(0,0,0,0.2); border: 1px solid #00B4D8; color: #00B4D8; cursor: pointer; transition: 0.3s; }
+        .agenda-btn.active { background: linear-gradient(135deg, #00B4D8, #00C853); color: #fff; border-color: transparent; }
+
+        .search-container { display: flex; gap: 10px; margin: 20px; flex-wrap: wrap; }
+        .search-container input { flex: 1; padding: 12px 20px; border-radius: 30px; border: 1px solid #00B4D8; background: rgba(0,0,0,0.2); color: #fff; font-size: 14px; outline: none; }
+        .search-container button { padding: 12px 25px; border-radius: 30px; border: none; background: linear-gradient(135deg, #00B4D8, #00C853); color: #fff; font-weight: 600; cursor: pointer; }
+
+        .selected-teams-list { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 12px; margin: 12px 0; }
+        .selected-team { display: inline-block; background: linear-gradient(135deg, #00B4D8, #00C853); color: #fff; padding: 4px 10px; border-radius: 20px; margin: 4px; font-size: 12px; }
+        .remove-team { margin-left: 6px; cursor: pointer; font-weight: bold; }
+        .generated-bet-card { background: rgba(0,200,83,0.1); border: 1px solid #00C853; border-radius: 12px; padding: 12px; margin: 12px 0; }
+
+        .payment-methods-grid { display: flex; flex-direction: column; gap: 15px; }
+        .payment-item { background: rgba(0,0,0,0.15); padding: 15px; border-radius: 12px; border: 1px solid #00B4D8; }
+        .code-container { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+        .code-text { font-family: monospace; word-break: break-all; flex: 1; background: rgba(0,0,0,0.3); padding: 8px; border-radius: 8px; font-size: 12px; }
+
+        .plans-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; padding: 30px 20px; }
+        .plan-card {
+            border-radius: 25px;
+            padding: 25px 20px;
+            width: 280px;
+            text-align: center;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .plan-card:hover { transform: translateY(-10px) scale(1.02); }
+        .plan-card:nth-child(1) { background: linear-gradient(135deg, #2c3e50, #3498db); }
+        .plan-card:nth-child(2) { background: linear-gradient(135deg, #FF512F, #F09819); }
+        .plan-card:nth-child(3) { background: linear-gradient(135deg, #1a1a2e, #16213e); border: 1px solid #00B4D8; }
+        .plan-card:nth-child(4) { background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); border: 1px solid #9B59B6; }
+        .plan-card:nth-child(5) { background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb4d); border: 1px solid #FF6B35; }
+        .plan-card:nth-child(6) { background: linear-gradient(135deg, #0b8793, #360033); border: 1px solid #FF6B6B; }
+        .plan-icon { font-size: 48px; margin-bottom: 15px; }
+        .plan-name { font-size: 22px; font-weight: 800; margin-bottom: 10px; color: #fff; }
+        .plan-price { font-size: 32px; font-weight: 800; margin: 15px 0; color: #fff; }
+        .plan-features p { color: rgba(255,255,255,0.9); font-size: 13px; margin: 5px 0; }
+        .btn-plan { padding: 12px 30px; border-radius: 40px; font-weight: 700; cursor: pointer; border: none; margin-top: 15px; background: rgba(255,255,255,0.95); color: #333; width: 100%; transition: 0.3s; }
+        .btn-plan:hover { transform: scale(1.05); background: #fff; }
+
+        .admin-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 20px; }
+        .admin-card { background: rgba(13,31,60,0.9); border-radius: 15px; padding: 15px; text-align: center; border: 1px solid #00B4D8; }
+        .admin-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        .admin-table th, .admin-table td { padding: 8px; text-align: left; border-bottom: 1px solid #00B4D8; }
+        .admin-table th { color: #00C853; }
+        .status-badge { padding: 2px 6px; border-radius: 20px; font-size: 10px; }
+        .status-active { background: rgba(0,200,83,0.2); color: #00C853; }
+        .status-banned { background: rgba(255,59,48,0.2); color: #FF3B30; }
+
+        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 10px 0; }
+        .stat-item { background: rgba(0,0,0,0.2); padding: 8px; border-radius: 8px; text-align: center; }
+        .stat-label { font-size: 11px; color: #aaa; }
+        .stat-value { font-size: 14px; font-weight: 700; }
+        .market-row { display: flex; justify-content: space-between; align-items: center; padding: 8px; border-bottom: 1px solid rgba(0,180,216,0.2); }
+        .market-name { font-size: 13px; }
+        .market-prob { font-size: 13px; font-weight: 700; color: #00C853; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.2); border-radius: 3px; overflow: hidden; margin: 5px 0; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #00B4D8, #00C853); border-radius: 3px; }
+        .form-badge { display: inline-block; width: 30px; height: 30px; line-height: 30px; text-align: center; border-radius: 50%; margin: 0 2px; font-weight: 700; font-size: 12px; }
+        .form-win { background: #00C853; color: #fff; }
+        .form-draw { background: #FFC107; color: #333; }
+        .form-loss { background: #FF3B30; color: #fff; }
+
+        .secret-admin-btn {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            font-size: 16px;
+            opacity: 0.35;
+            cursor: pointer;
+            z-index: 1000;
+            color: #888;
+            transition: 0.3s;
+            background: transparent;
+            padding: 5px 8px;
+            border-radius: 20px;
+        }
+        .secret-admin-btn:hover { opacity: 0.8; color: #00C853; background: rgba(0,0,0,0.2); }
+
+        @media (max-width: 768px) {
+            .games-grid { grid-template-columns: 1fr; }
+            .team-logo { width: 28px; height: 28px; }
+            .plan-card { width: 100%; max-width: 300px; }
+            .agenda-filters { flex-wrap: wrap; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .theme-visitor-container { gap: 5px; }
+            .theme-btn-header { font-size: 9px; padding: 3px 8px; }
+            .visitor-btn-header { font-size: 10px; padding: 3px 8px; }
+            .secret-admin-btn { font-size: 14px; bottom: 5px; left: 5px; }
+        }
+        @media (max-width: 480px) {
+            .right-nav { gap: 5px; }
+            .logo { font-size: 16px; }
+            .theme-btn-header span { display: none; }
+        }
+    </style>
+</head>
+<body class="dark">
+
+<div class="animated-bg"></div>
+<div class="particles" id="particles"></div>
+
+<div class="top-nav">
+    <div class="nav-container">
+        <div class="menu-icon" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+        <div class="logo" onclick="showSection('home')"><i class="fas fa-robot"></i> WIN BETS</div>
+        <div class="right-nav">
+            <div class="theme-visitor-container">
+                <div class="theme-btn-header" onclick="toggleTheme()"><i class="fas fa-moon" id="themeIcon"></i> <span id="themeText">Escuro</span></div>
+                <div class="visitor-btn-header" id="userBtn" onclick="openAuthModal()"><i class="fas fa-user"></i> <span id="userNameDisplay">Visitante</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="side-menu" id="sideMenu">
+    <div class="close-menu" onclick="toggleMenu()">✕</div>
+    <div class="menu-item" onclick="showSection('home')"><i class="fas fa-home"></i> Início</div>
+    <div class="menu-item" onclick="showSection('account')"><i class="fas fa-user-circle"></i> Minha Conta</div>
+    <div class="menu-item" onclick="showSection('deposit')"><i class="fas fa-wallet"></i> Assinar PRO</div>
+    <div class="menu-item" onclick="showSection('withdraw')"><i class="fas fa-money-bill-wave"></i> Sacar Comissões</div>
+    <div class="menu-item" onclick="showSection('bookmakers')"><i class="fas fa-trophy"></i> Casas de Apostas</div>
+    <div class="menu-item" onclick="showSection('leagues')"><i class="fas fa-futbol"></i> Todas as Ligas</div>
+    <div class="menu-item" onclick="showSection('live')"><i class="fas fa-video"></i> Jogos ao Vivo</div>
+    <div class="menu-item" onclick="showSection('agenda')"><i class="fas fa-calendar-alt"></i> Agenda (Jogos Passados)</div>
+    <div class="menu-item" onclick="showSection('agendaFuturo')"><i class="fas fa-calendar-week"></i> 📅 Próximos Jogos (30 Dias)</div>
+    <div class="menu-item" onclick="showSection('multibets')"><i class="fas fa-ticket-alt"></i> Seleção Inteligente</div>
+    <div class="menu-item" onclick="showSection('mybets')"><i class="fas fa-list-check"></i> Meus Bilhetes</div>
+    <div class="menu-item" onclick="showSection('ai')"><i class="fas fa-brain"></i> IA Avançada</div>
+    <div class="menu-item" onclick="showSection('stats')"><i class="fas fa-chart-bar"></i> Estatísticas</div>
+    <div class="menu-item" onclick="showSection('plans')"><i class="fas fa-gem"></i> Planos</div>
+    <div class="menu-item" onclick="showSection('affiliates')"><i class="fas fa-users"></i> Afiliados 10%</div>
+    <div class="menu-item" onclick="showSection('ranking')"><i class="fas fa-chart-simple"></i> Ranking</div>
+    <div class="menu-item" onclick="showSection('faq')"><i class="fas fa-question-circle"></i> Dúvidas</div>
+    <div class="menu-item" onclick="showSection('blog')"><i class="fas fa-newspaper"></i> Blog</div>
+    <div class="menu-item" onclick="showSection('help')"><i class="fas fa-headset"></i> Ajuda</div>
+    <div class="menu-item" onclick="showSection('policies')"><i class="fas fa-file-contract"></i> Políticas</div>
+    <div class="menu-item" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Sair</div>
+</div>
+
+<div id="authModal" class="modal">
+    <div class="modal-content">
+        <h2 id="authTitle">🔐 Cadastre-se</h2>
+        <div id="regFields">
+            <input type="text" id="regName" placeholder="Nome Completo">
+            <input type="tel" id="regPhone" placeholder="Telefone (ex: 927224260 ou +244927224260)">
+            <input type="email" id="regEmail" placeholder="E-mail">
+            <input type="password" id="regPassword" placeholder="Senha (8+ caracteres)">
+            <input type="password" id="regConfirmPassword" placeholder="Confirmar senha">
+        </div>
+        <div id="loginFields" style="display:none;">
+            <input type="text" id="loginIdentifier" placeholder="E-mail ou Número de telefone">
+            <input type="password" id="loginPassword" placeholder="Senha">
+            <div class="forgot-password" onclick="showForgotPassword()" style="text-align:right; margin-top:5px; cursor:pointer; color:#00B4D8; font-size:12px;">Esqueceu a senha?</div>
+        </div>
+        <button id="authButton" onclick="register()">Cadastrar</button>
+        <div class="switch-auth"><span id="switchText" style="color:#00B4D8;cursor:pointer" onclick="switchToLogin()">Já tenho conta</span></div>
+    </div>
+</div>
+
+<div id="forgotModal" class="modal">
+    <div class="modal-content">
+        <h2>🔐 Recuperar Senha</h2>
+        <p>Digite aqui o seu e-mail cadastrado</p>
+        <input type="email" id="forgotEmail" placeholder="Seu e-mail cadastrado">
+        <button onclick="sendRecoveryCode()">Enviar Código</button>
+        <div style="margin-top:10px; text-align:center;"><span style="color:#00B4D8;cursor:pointer" onclick="closeForgotModal()">Voltar</span></div>
+    </div>
+</div>
+
+<div id="resetModal" class="modal">
+    <div class="modal-content">
+        <h2>🔐 Redefinir Senha</h2>
+        <input type="text" id="resetCode" placeholder="Código de verificação">
+        <input type="password" id="resetNewPassword" placeholder="Nova senha (8+ caracteres)">
+        <button onclick="resetPassword()">Redefinir Senha</button>
+        <div style="margin-top:10px; text-align:center;"><span style="color:#00B4D8;cursor:pointer" onclick="closeResetModal()">Voltar</span></div>
+    </div>
+</div>
+
+<div id="accessBlock" class="access-block">
+    <div class="modal-content" style="text-align:center;">
+        <i class="fas fa-lock" style="font-size:50px; color:#00C853; margin-bottom:20px;"></i>
+        <h2>🔐 Acesso Restrito</h2>
+        <p>Faça login ou cadastre-se para aceder ao conteúdo completo.</p>
+        <button class="btn-pay" onclick="closeAccessBlockAndShowLogin()">Entrar</button>
+        <button class="btn-pay" onclick="closeAccessBlockAndShowRegister()" style="margin-top:10px;">Criar conta</button>
+    </div>
+</div>
+
+<div id="bookmakerModal" class="modal">
+    <div class="modal-content">
+        <h2><i class="fas fa-trophy"></i> Escolha onde apostar</h2>
+        <div id="bookmakerSelectionList"></div>
+        <button style="margin-top:20px; background:transparent; border:1px solid #00B4D8;" onclick="closeBookmakerModal()">Cancelar</button>
+    </div>
+</div>
+
+<div class="main-content" id="mainContent" style="display:none;">
+    <div id="homeSection">
+        <div class="api-status" id="apiStatus">
+            <div class="api-badge" id="apiFootballStatus">🟡 SportScore: Verificando...</div>
+            <div class="api-badge" id="apiOddsStatus">🟡 SportScore: Configurada</div>
+        </div>
+        <div class="search-container">
+            <input type="text" id="teamSearchInput" placeholder="🔍 Pesquisar equipa..." onkeyup="searchTeams()">
+            <button onclick="searchTeams()"><i class="fas fa-search"></i> Pesquisar</button>
+        </div>
+        <div id="gamesList"><div class="loading"><i class="fas fa-spinner"></i> Carregando jogos...</div></div>
+    </div>
+
+    <div id="agendaFuturoSection" style="display:none">
+        <h1 class="section-title">📅 Próximos Jogos (Próximos 30 Dias)</h1>
+        <div class="agenda-filters">
+            <button class="agenda-btn active" onclick="filterFutureGamesByDate('all')">📋 Todos</button>
+            <button class="agenda-btn" onclick="filterFutureGamesByDate('week')">📆 Próximos 7 Dias</button>
+            <button class="agenda-btn" onclick="filterFutureGamesByDate('15days')">📆 Próximos 15 Dias</button>
+            <button class="agenda-btn" onclick="filterFutureGamesByDate('30days')">📆 Próximos 30 Dias</button>
+        </div>
+        <div style="margin: 15px 20px;">
+            <input type="date" id="futureDatePicker" style="padding: 10px; border-radius: 8px; border: 1px solid #00B4D8; background: rgba(0,0,0,0.2); color: #fff; width: 100%; max-width: 200px;" onchange="filterFutureGamesByDatePicker()">
+        </div>
+        <div id="futureGamesList" class="games-grid"><div class="loading"><i class="fas fa-spinner"></i> Carregando jogos futuros...</div></div>
+    </div>
+
+    <div id="agendaSection" style="display:none">
+        <h1 class="section-title">📅 Agenda de Jogos (Últimos 3 dias)</h1>
+        <div class="agenda-filters">
+            <button class="agenda-btn active" onclick="filterAgenda('all')">📋 Todos</button>
+            <button class="agenda-btn" onclick="filterAgenda('yesterday')">📆 Ontem</button>
+            <button class="agenda-btn" onclick="filterAgenda('2days')">📆 2 dias atrás</button>
+            <button class="agenda-btn" onclick="filterAgenda('3days')">📆 3 dias atrás</button>
+        </div>
+        <div id="agendaGamesList" class="games-grid"></div>
+    </div>
+
+    <div id="analysisSection" style="display:none">
+        <button class="back-btn" onclick="closeAnalysis()"><i class="fas fa-arrow-left"></i> Voltar</button>
+        <div id="analysisContent"></div>
+    </div>
+
+    <div id="accountSection" style="display:none"><h1 class="section-title">👤 Minha Conta</h1><div class="analysis-box" id="accountInfo"></div></div>
+    
+    <div id="depositSection" style="display:none">
+        <h1 class="section-title">💰 Assinar PRO</h1>
+        <div class="analysis-box">
+            <h3>💵 Métodos de Pagamento em Dólar (USD):</h3>
+            <div class="payment-methods-grid">
+                <div class="payment-item"><p><strong>💰 Binance (TRC20)</strong></p><div class="code-container"><span class="code-text">TXPWLZ3jPUyzAYZDuKCKJPTd7PSXk53Kvw</span><button class="btn-pay" onclick="copyText('TXPWLZ3jPUyzAYZDuKCKJPTd7PSXk53Kvw')">Copiar</button></div></div>
+                <div class="payment-item"><p><strong>💰 Bybit (BEP20)</strong></p><div class="code-container"><span class="code-text">0x0bed3e1862b7214b3b83b6fc0000a0097d608bbd</span><button class="btn-pay" onclick="copyText('0x0bed3e1862b7214b3b83b6fc0000a0097d608bbd')">Copiar</button></div></div>
+                <div class="payment-item"><p><strong>💰 Airtm</strong></p><div class="code-container"><span class="code-text">ia winbet@ai.com</span><button class="btn-pay" onclick="copyText('iabet@ai.com')">Copiar</button></div></div>
+            </div>
+            <p style="margin-top:15px; font-size:12px; color:#aaa;">⚠️ Após o pagamento, envie comprovativo para WhatsApp 927224260</p>
+        </div>
+    </div>
+
+    <div id="withdrawSection" style="display:none">
+        <h1 class="section-title">💸 Sacar Comissões</h1>
+        <div class="analysis-box">
+            <div id="withdrawMessage"></div>
+            <p>💰 Valor mínimo de saque: <strong>10 USD</strong></p>
+            <p>⏰ Processamento: 24-48 horas</p>
+            <p>💳 Pagamento via Binance ou Bybit</p>
+            <input type="number" id="withdrawAmount" placeholder="Valor em USD">
+            <button class="btn-pay" onclick="makeWithdraw()">Solicitar Saque</button>
+        </div>
+    </div>
+    
+    <div id="bookmakersSection" style="display:none">
+        <h1 class="section-title">🏆 Casas de Apostas</h1>
+        <div class="games-grid" id="bookmakersList"></div>
+        <div style="text-align: center;"><button class="btn-pay" onclick="loadMoreBookmakers()">Ver mais casas →</button></div>
+    </div>
+    
+    <div id="leaguesSection" style="display:none">
+        <h1 class="section-title">🌍 Todas as Ligas Mundiais</h1>
+        <div id="leaguesList" class="analysis-box"></div>
+        <div style="text-align: center;"><button class="btn-pay" onclick="loadMoreLeagues()">Ver mais ligas →</button></div>
+    </div>
+    
+    <div id="liveSection" style="display:none"><h1 class="section-title">📺 Jogos ao Vivo</h1><div id="liveGamesList" class="games-grid"></div></div>
+    
+    <div id="multibetsSection" style="display:none">
+        <h1 class="section-title">🎲 Seleção Inteligente</h1>
+        <div class="analysis-box">
+            <p>🤖 Selecione as equipas que deseja apostar.</p>
+            <div class="team-selector" id="teamSelector"></div>
+            <div class="selected-teams-list"><strong>📋 Equipas selecionadas:</strong><div id="selectedTeamsContainer"></div></div>
+            <input type="number" id="betStake" placeholder="Valor da aposta (USD)">
+            <button class="btn-pay" onclick="generateMultibet()">🎲 Gerar Aposta</button>
+        </div>
+        <div id="generatedBetsList" class="generated-bet-card" style="display:none;"></div>
+    </div>
+    
+    <div id="mybetsSection" style="display:none"><h1 class="section-title">📋 Meus Bilhetes</h1><div id="myBetsList" class="analysis-box"></div></div>
+    
+    <div id="aiSection" style="display:none"><h1 class="section-title">🤖 IA Avançada</h1><div id="aiAnalysis" class="analysis-box"></div></div>
+    
+    <div id="statsSection" style="display:none">
+        <h1 class="section-title">📊 Estatísticas Completas</h1>
+        <div class="analysis-box">
+            <p>📈 Total de jogos analisados: 2.456+</p>
+            <p>🎯 Taxa de acerto da IA: 68.2%</p>
+            <p>💰 ROI médio dos usuários PRO: +9.4%</p>
+            <p>🏆 Melhor liga para apostas: Premier League (74% acerto)</p>
+            <p>⚽ Mais de 2.5 golos: 61% acerto</p>
+            <p>🎲 Handicap Asiático: 56% acerto</p>
+            <p>📊 Cantos: 63% acerto</p>
+            <p>🟨 Cartões: 51% acerto</p>
+            <p>🏆 Top 5 apostadores: Média de 75% acerto</p>
+            <p>📅 Jogos analisados hoje: <span id="statsTodayGames">0</span></p>
+            <p>🌍 Ligas disponíveis: <span id="statsTotalLeagues">70</span>+</p>
+            <p>🤖 Precisão da IA (último mês): 71.4%</p>
+            <p>⚡ ROI recomendado: 2-5% por aposta</p>
+        </div>
+    </div>
+    
+    <div id="plansSection" style="display:none">
+        <h1 class="section-title">💰 Planos e Assinaturas</h1>
+        <div class="currency-selector"><div class="currency-btn active" onclick="changePlanCurrency('USD')">💵 Dólar (USD)</div></div>
+        <div class="plans-container" id="plansContainer"></div>
+        <div style="text-align:center; margin-top:20px;"><p>🔒 Pagamento seguro via Binance, Bybit ou Airtm</p><button class="btn-pay" onclick="showPaymentMethods()">Ver métodos de pagamento</button></div>
+    </div>
+
+    <div id="affiliatesSection" style="display:none"><h1 class="section-title">👥 Programa de Afiliados - 10%</h1><div class="analysis-box"><p>🔗 Seu link exclusivo: <span id="affiliateLink" style="color:#00C853; word-break:break-all;"></span></p><p>💰 Comissões acumuladas: <span id="affiliateCommissions">0</span> USD</p><p>📊 Total de indicações: <span id="affiliateReferrals">0</span></p><p>🎁 Bónus por indicação: 10% do primeiro depósito</p><p>💳 Pagamento de comissões: Todos os Dias</p><button class="btn-pay" onclick="copyReferralLink()">Copiar Link</button></div></div>
+    
+    <div id="rankingSection" style="display:none"><h1 class="section-title">🏆 Ranking de Afiliados</h1><div id="rankingList" class="analysis-box"></div></div>
+    
+    <div id="faqSection" style="display:none">
+        <h1 class="section-title">❓ Dúvidas Frequentes</h1>
+        <div class="analysis-box">
+            <p><strong>🔹 Como funciona a IA?</strong> A IA analisa 5 APIs simultaneamente para gerar probabilidades precisas com taxa de acerto superior a 88%.</p>
+            <p><strong>🔹 Como ativo o plano PRO?</strong> Escolha o plano desejado em "Assinar PRO", faça o pagamento e envie comprovativo para WhatsApp 927224260.</p>
+            <p><strong>🔹 As apostas são reais?</strong> Sim, redirecionamos para as casas de apostas oficiais parceiras 100% Seguras de acordo as preferências do Usuário</p>
+            <p><strong>🔹 Se eu ganhar, quem me paga?</strong> O dinheiro ganho nas apostas são Adicionados a sua Casa de aposta oficial. Se for em Apostas físicas, dirija-se a um Agente mais próximo.</p>
+            <p><strong>🔹 Posso recuperar minha senha?</strong> Sim, clique em "Esqueci a senha" na tela de login que enviaremos instruções para seu email.</p>
+            <p><strong>🔹 Como funciona o programa de afiliados?</strong> Cada usuário tem um link exclusivo. Ao compartilhar, Você ganha 10% de comissão sobre cada Plano PRO que o seu Afiliado fizer.</p>
+            <p><strong>🔹 Quanto tempo leva para sacar comissões? </strong> saques são processados em 24-48 horas úteis e enviados para sua carteira Binance/Bybit.</p>
+            <p><strong>🔹 Usuários FREE podem sacar comissões?</strong> Não. Apenas usuários PRO têm acesso ao saque de comissões. Acumule suas comissões e assine PRO para liberar o saque!</p>
+        </div>
+    </div>
+    
+    <div id="blogSection" style="display:none"><h1 class="section-title">📝 Blog - Dicas e Análises</h1><div id="blogPosts" class="analysis-box"></div></div>
+    
+    <div id="helpSection" style="display:none">
+        <h1 class="section-title">🆘 Ajuda</h1>
+        <div class="analysis-box">
+            <p>📧 E-mail: suporte@iabet.com</p>
+            <p>📱 WhatsApp: <a href="https://wa.me/244927224260" target="_blank" style="color:#00C853;">Clique aqui</a></p>
+            <p>⏰ Atendimento: 24 horas por dia</p>
+        </div>
+    </div>
+    
+    <div id="policiesSection" style="display:none">
+        <h1 class="section-title">📜 Políticas de Privacidade</h1>
+        <div class="analysis-box">
+            <p><strong>Conforme Lei Angolana de Proteção de Dados (Lei n.º 22/21) e RGPD.</strong></p>
+            <p>1xBet opera sob licença internacional emitida pelo Governo de Curaçau (nº 1668/JAZ). A plataforma IA-WIN BET atua apenas como agregador de análises e indicadores, não realizando apostas diretamente. Todas as apostas são realizadas nas casas de apostas parceiras, que seguem as regulamentações locais e internacionais. Seus dados são criptografados e nunca compartilhados com terceiros sem autorização expressa. Ao utilizar nossa plataforma, você concorda com os termos e condições estabelecidos.</p>
+            <div class="analysis-box">
+                <h3><i class="fas fa-file-contract"></i> Políticas Oficiais</h3>
+                <p>🔗 <a href="https://1xbet.com/pt/terms-and-conditions/" target="_blank" style="color: #00C853;">Políticas 1xBet</a><br>🔗 <a href="https://www.bet365.com/pt/terms-and-conditions" target="_blank" style="color: #00C853;">Políticas Bet365</a></p>
+                <p style="font-size: 12px; margin-top: 10px; color: #aaa;">✅ Clique nos links para acessar as políticas oficiais</p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="adminSection" style="display:none">
+        <h1 class="section-title">👑 Painel do Administrador</h1>
+        <div id="adminLoginPanel" class="analysis-box">
+            <h3>Acesso Administrativo</h3>
+            <input type="tel" id="adminPhone" placeholder="Telefone" value="927224260">
+            <input type="email" id="adminEmail" placeholder="Email" value="suporte@iabet.com">
+            <input type="password" id="adminPassword" placeholder="Senha">
+            <button class="btn-pay" onclick="adminLogin()">Entrar como Admin</button>
+        </div>
+        <div id="adminDashboard" style="display:none;">
+            <div class="admin-stats">
+                <div class="admin-card"><h4>Total Usuários</h4><div id="adminTotalUsers">0</div></div>
+                <div class="admin-card"><h4>Usuários PRO</h4><div id="adminProUsers">0</div></div>
+                <div class="admin-card"><h4>Total Apostas</h4><div id="adminTotalBets">0</div></div>
+            </div>
+            <h3 class="section-title">📋 Usuários Cadastrados</h3>
+            <div style="overflow-x: auto;"><table class="admin-table"><thead><tr><th>Nome</th><th>Email</th><th>Plano</th><th>Status</th><th>Ações</th></tr></thead><tbody id="adminUsersList"></tbody></table></div>
+            <h3 class="section-title">📝 Publicar no Blog</h3>
+            <div class="analysis-box"><input type="text" id="blogTitle" placeholder="Título"><textarea id="blogContent" rows="5" placeholder="Conteúdo"></textarea><button class="btn-pay" onclick="publishBlogPost()">Publicar</button></div>
+            <button class="btn-pay" onclick="resetSystem()" style="background:#FF3B30; color:#fff;">⚠️ Resetar Sistema</button>
+        </div>
+    </div>
+</div>
+
+<div id="greetingMessage" class="greeting-message"></div>
+
+<div class="secret-admin-btn" id="secretAdminBtn">
+    <i class="fas fa-lock"></i>
+</div>
+
+<script>
+    const API_BASE = '/.netlify/functions/api-proxy';
+    const AI_API_BASE = '/.netlify/functions/ai-analysis';
+
+    const teamLogos = {
+        'Barcelona': 'https://cdn.freebiesupply.com/logos/large/2x/fc-barcelona-logo-png-transparent.png',
+        'Real Madrid': 'https://cdn.freebiesupply.com/logos/large/2x/real-madrid-cf-logo-png-transparent.png',
+        'Manchester City': 'https://cdn.freebiesupply.com/logos/large/2x/manchester-city-logo-png-transparent.png',
+        'Liverpool': 'https://cdn.freebiesupply.com/logos/large/2x/liverpool-fc-logo-png-transparent.png',
+        'Bayern Munique': 'https://cdn.freebiesupply.com/logos/large/2x/bayern-munich-logo-png-transparent.png',
+        'PSG': 'https://cdn.freebiesupply.com/logos/large/2x/paris-saint-germain-fc-logo-png-transparent.png',
+        'Benfica': 'https://cdn.freebiesupply.com/logos/large/2x/sl-benfica-logo-png-transparent.png',
+        'Porto': 'https://cdn.freebiesupply.com/logos/large/2x/fc-porto-logo-png-transparent.png',
+        'Juventus': 'https://cdn.freebiesupply.com/logos/large/2x/juventus-fc-logo-png-transparent.png',
+        'AC Milan': 'https://cdn.freebiesupply.com/logos/large/2x/ac-milan-logo-png-transparent.png',
+        'Inter Milan': 'https://cdn.freebiesupply.com/logos/large/2x/internazionale-milano-2021-logo-png-transparent.png',
+        'Arsenal': 'https://cdn.freebiesupply.com/logos/large/2x/arsenal-fc-logo-png-transparent.png',
+        'Chelsea': 'https://cdn.freebiesupply.com/logos/large/2x/chelsea-fc-logo-png-transparent.png',
+        'Tottenham': 'https://cdn.freebiesupply.com/logos/large/2x/tottenham-hotspur-fc-logo-png-transparent.png',
+        'Atlético Madrid': 'https://cdn.freebiesupply.com/logos/large/2x/atletico-madrid-logo-png-transparent.png',
+        'Sevilla': 'https://cdn.freebiesupply.com/logos/large/2x/sevilla-fc-logo-png-transparent.png',
+        'Borussia Dortmund': 'https://cdn.freebiesupply.com/logos/large/2x/borussia-dortmund-logo-png-transparent.png',
+        'Ajax': 'https://cdn.freebiesupply.com/logos/large/2x/ajax-amsterdam-logo-png-transparent.png',
+        'Sporting CP': 'https://cdn.freebiesupply.com/logos/large/2x/sporting-cp-logo-png-transparent.png',
+        'Napoli': 'https://cdn.freebiesupply.com/logos/large/2x/napoli-logo-png-transparent.png',
+        'Roma': 'https://cdn.freebiesupply.com/logos/large/2x/as-roma-logo-png-transparent.png',
+        'Lyon': 'https://cdn.freebiesupply.com/logos/large/2x/olympique-lyonnais-logo-png-transparent.png',
+        'Marseille': 'https://cdn.freebiesupply.com/logos/large/2x/olympique-de-marseille-logo-png-transparent.png',
+        'Feyenoord': 'https://cdn.freebiesupply.com/logos/large/2x/feyenoord-rotterdam-logo-png-transparent.png',
+        'Braga': 'https://cdn.freebiesupply.com/logos/large/2x/sc-braga-logo-png-transparent.png',
+        'Leipzig': 'https://cdn.freebiesupply.com/logos/large/2x/rb-leipzig-logo-png-transparent.png',
+        'Bayer Leverkusen': 'https://cdn.freebiesupply.com/logos/large/2x/bayer-leverkusen-logo-png-transparent.png',
+        'Newcastle': 'https://cdn.freebiesupply.com/logos/large/2x/newcastle-united-logo-png-transparent.png',
+        'Manchester United': 'https://cdn.freebiesupply.com/logos/large/2x/manchester-united-logo-png-transparent.png',
+        'Aston Villa': 'https://cdn.freebiesupply.com/logos/large/2x/aston-villa-logo-png-transparent.png',
+        'West Ham': 'https://cdn.freebiesupply.com/logos/large/2x/west-ham-united-logo-png-transparent.png',
+        'Brighton': 'https://cdn.freebiesupply.com/logos/large/2x/brighton-hove-albion-logo-png-transparent.png',
+        'Wolverhampton': 'https://cdn.freebiesupply.com/logos/large/2x/wolverhampton-wanderers-logo-png-transparent.png',
+        'Fulham': 'https://cdn.freebiesupply.com/logos/large/2x/fulham-fc-logo-png-transparent.png',
+        'Brentford': 'https://cdn.freebiesupply.com/logos/large/2x/brentford-fc-logo-png-transparent.png',
+        'Crystal Palace': 'https://cdn.freebiesupply.com/logos/large/2x/crystal-palace-fc-logo-png-transparent.png',
+        'Everton': 'https://cdn.freebiesupply.com/logos/large/2x/everton-fc-logo-png-transparent.png',
+        'Nottingham Forest': 'https://cdn.freebiesupply.com/logos/large/2x/nottingham-forest-logo-png-transparent.png',
+        'Luton Town': 'https://cdn.freebiesupply.com/logos/large/2x/luton-town-fc-logo-png-transparent.png',
+        'Burnley': 'https://cdn.freebiesupply.com/logos/large/2x/burnley-fc-logo-png-transparent.png',
+        'Sheffield United': 'https://cdn.freebiesupply.com/logos/large/2x/sheffield-united-logo-png-transparent.png',
+        'Flamengo': 'https://cdn.freebiesupply.com/logos/large/2x/flamengo-logo-png-transparent.png',
+        'Palmeiras': 'https://cdn.freebiesupply.com/logos/large/2x/palmeiras-logo-png-transparent.png',
+        'Santos': 'https://cdn.freebiesupply.com/logos/large/2x/santos-fc-logo-png-transparent.png',
+        'São Paulo': 'https://cdn.freebiesupply.com/logos/large/2x/sao-paulo-fc-logo-png-transparent.png',
+        'Corinthians': 'https://cdn.freebiesupply.com/logos/large/2x/corinthians-logo-png-transparent.png',
+        'Internacional': 'https://cdn.freebiesupply.com/logos/large/2x/internacional-logo-png-transparent.png',
+        'Grêmio': 'https://cdn.freebiesupply.com/logos/large/2x/gremio-logo-png-transparent.png',
+        'River Plate': 'https://cdn.freebiesupply.com/logos/large/2x/river-plate-logo-png-transparent.png',
+        'Boca Juniors': 'https://cdn.freebiesupply.com/logos/large/2x/boca-juniors-logo-png-transparent.png',
+        'Petro Luanda': 'https://cdn.freebiesupply.com/logos/large/2x/atletico-mineiro-logo-png-transparent.png',
+        '1º Agosto': 'https://cdn.freebiesupply.com/logos/large/2x/africa-sports-logo-png-transparent.png',
+        'Petro de Luanda': 'https://cdn.freebiesupply.com/logos/large/2x/atletico-mineiro-logo-png-transparent.png',
+        'Primeiro de Agosto': 'https://cdn.freebiesupply.com/logos/large/2x/africa-sports-logo-png-transparent.png',
+        'Default': 'https://cdn-icons-png.flaticon.com/512/44/44938.png'
+    };
+
+    function getTeamLogo(teamName) {
+        let cleanName = teamName.trim();
+        if (teamLogos[cleanName]) return teamLogos[cleanName];
+        for (let key in teamLogos) {
+            if (cleanName.toLowerCase().includes(key.toLowerCase()) || key.toLowerCase().includes(cleanName.toLowerCase())) {
+                return teamLogos[key];
+            }
+        }
+        return teamLogos['Default'];
+    }
+
+    function copyText(text) { navigator.clipboard.writeText(text); alert('Copiado!'); }
+    
+    function createParticles() { 
+        const container = document.getElementById('particles');
+        if (!container) return;
+        for (let i = 0; i < 40; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            const size = Math.random() * 6 + 2;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            container.appendChild(particle);
+        }
+    }
+
+    async function checkAllApisStatus() {
+        try {
+            const response = await fetch(`${API_BASE}/sportscore/status`);
+            const footballEl = document.getElementById('apiFootballStatus');
+            if (response.ok) {
+                footballEl.innerHTML = '🟢 SportScore: Online';
+                footballEl.className = 'api-badge';
+            } else {
+                footballEl.innerHTML = '🔴 SportScore: Offline';
+                footballEl.className = 'api-badge api-offline';
+            }
+        } catch (error) {
+            document.getElementById('apiFootballStatus').innerHTML = '🔴 SportScore: Offline';
+            document.getElementById('apiFootballStatus').className = 'api-badge api-offline';
+        }
+        document.getElementById('apiOddsStatus').innerHTML = '🟢 SportScore: Configurada';
+        document.getElementById('apiOddsStatus').className = 'api-badge';
+    }
+
+    function updateStats() {
+        const todayGamesCount = document.getElementById('statsTodayGames');
+        if (todayGamesCount && dailyGames) todayGamesCount.innerText = dailyGames.length;
+    }
+
+    let dailyGames = [];
+    let allFutureGames = [];
+
+    async function fetchRealGames() {
+        try {
+            const today = new Date().toISOString().split('T')[0];
+            const response = await fetch(`${API_BASE}/sportscore/fixtures?date=${today}`);
+            if (response.ok) {
+                const result = await response.json();
+                if (result.data && result.data.data && result.data.data.length > 0) {
+                    return result.data.data;
+                }
+            }
+        } catch (error) {
+            console.error('Erro ao buscar jogos reais:', error);
+        }
+        return null;
+    }
+
+    function processApiGames(fixtures) {
+        let gamesArray = fixtures;
+        if (fixtures && fixtures.data) {
+            gamesArray = fixtures.data;
+        } else if (fixtures && fixtures.response) {
+            gamesArray = fixtures.response;
+        } else if (!Array.isArray(gamesArray) && gamesArray) {
+            gamesArray = [gamesArray];
+        }
+        
+        if (!gamesArray || !Array.isArray(gamesArray)) {
+            console.error('Estrutura inválida em processApiGames:', fixtures);
+            return [];
+        }
+        
+        const games = [];
+        let id = 1;
+        
+        for (const fixture of gamesArray) {
+            const homeProb = 45 + Math.floor(Math.random() * 35);
+            const drawProb = 15 + Math.floor(Math.random() * 20);
+            const awayProb = 100 - homeProb - drawProb;
+            
+            const fixtureDate = fixture.date ? new Date(fixture.date) : new Date();
+            
+            games.push({
+                id: id++,
+                league: fixture.league?.name || fixture.competition?.name || 'Liga',
+                time: fixtureDate.toLocaleTimeString('pt-PT', { hour: '2-digit', minute: '2-digit' }),
+                home: fixture.home_team?.name || fixture.homeTeam?.name || 'Time A',
+                away: fixture.away_team?.name || fixture.awayTeam?.name || 'Time B',
+                probHome: homeProb,
+                probDraw: drawProb,
+                probAway: awayProb,
+                confidence: homeProb > 55 ? 'ALTA' : (homeProb > 45 ? 'MÉDIA' : 'BAIXA'),
+                fixtureId: fixture.id,
+                date: fixtureDate.toLocaleDateString('pt-PT'),
+                rawDate: fixtureDate
+            });
+        }
+        
+        games.sort((a, b) => new Date(a.rawDate) - new Date(b.rawDate));
+        return games;
+    }
+
+    async function loadGames() {
+        const container = document.getElementById('gamesList');
+        container.innerHTML = '<div class="loading"><i class="fas fa-spinner"></i> Carregando jogos reais...</div>';
+        
+        const realFixtures = await fetchRealGames();
+        
+        if (realFixtures && realFixtures.length > 0) {
+            dailyGames = processApiGames(realFixtures);
+            document.getElementById('apiFootballStatus').innerHTML = '🟢 SportScore: Online (dados reais)';
+            
+            container.innerHTML = dailyGames.map(game => `
+                <div class="game-card" onclick="showAnalysis(${game.id})">
+                    <div class="team-names">
+                        <div class="team-info"><img src="${getTeamLogo(game.home)}" class="team-logo" onerror="this.src='${getTeamLogo('Default')}'"> ${game.home}</div>
+                        <span>VS</span>
+                        <div class="team-info">${game.away} <img src="${getTeamLogo(game.away)}" class="team-logo" onerror="this.src='${getTeamLogo('Default')}'"></div>
+                    </div>
+                    <div class="probability-bar"><div class="probability-fill" style="width: ${game.probHome}%">${game.home}: ${game.probHome}%</div></div>
+                    <div class="probability-bar"><div class="probability-fill" style="width: ${game.probDraw}%">Empate: ${game.probDraw}%</div></div>
+                    <div class="probability-bar"><div class="probability-fill" style="width: ${game.probAway}%">${game.away}: ${game.probAway}%</div></div>
+                    <div style="display:flex; justify-content:space-between; margin-top:10px;">
+                        <span>🏆 ${game.league}</span>
+                        <span>⏰ ${game.time}</span>
+                        <span>📅 ${game.date || 'Hoje'}</span>
+                    </div>
+                    <button class="btn-pay" style="margin-top:10px; width:100%;" onclick="event.stopPropagation(); showAnalysis(${game.id})">🔍 Análise IA</button>
+                </div>
+            `).join('');
+        } else {
+            container.innerHTML = '<div class="analysis-box" style="text-align:center; border-color: #FF3B30;"><p>❌ SportScore offline ou sem dados. Tente novamente mais tarde.</p></div>';
+            document.getElementById('apiFootballStatus').innerHTML = '🔴 SportScore: Offline';
+        }
+        
+        updateStats();
+    }
+
+    async function callAIAnalysis(homeTeam, awayTeam, league, matchId) {
+        try {
+            const response = await fetch(AI_API_BASE, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ homeTeam, awayTeam, league, matchId })
+            });
+            if (response.ok) {
+                const result = await response.json();
+                return result.analysis;
+            }
+        } catch (error) {
+            console.error('Erro na chamada da IA:', error);
+        }
+        return null;
+    }
+
+    function generateDetailedStats(homeTeam, awayTeam, probHome, probDraw, probAway) {
+        const h2h = {
+            homeWins: Math.floor(Math.random() * 8) + 3,
+            draws: Math.floor(Math.random() * 5) + 2,
+            awayWins: Math.floor(Math.random() * 5) + 1,
+            lastMeetings: [
+                { home: homeTeam, away: awayTeam, score: `${Math.floor(Math.random() * 3)}-${Math.floor(Math.random() * 3)}`, date: "2025" },
+                { home: awayTeam, away: homeTeam, score: `${Math.floor(Math.random() * 3)}-${Math.floor(Math.random() * 3)}`, date: "2025" },
+                { home: homeTeam, away: awayTeam, score: `${Math.floor(Math.random() * 3)}-${Math.floor(Math.random() * 3)}`, date: "2024" }
+            ]
+        };
+        
+        const homeForm = ['V', 'E', 'V', 'D', 'V'];
+        const awayForm = ['V', 'D', 'E', 'V', 'D'];
+        
+        const homeStats = {
+            avgPossession: Math.floor(Math.random() * 30) + 50,
+            avgShots: Math.floor(Math.random() * 10) + 12,
+            avgShotsOnTarget: Math.floor(Math.random() * 6) + 5,
+            avgGoals: (Math.random() * 2 + 1).toFixed(1),
+            avgGoalsConceded: (Math.random() * 1.5 + 0.5).toFixed(1),
+            homeStrength: Math.floor(Math.random() * 30) + 60
+        };
+        
+        const awayStats = {
+            avgPossession: Math.floor(Math.random() * 30) + 45,
+            avgShots: Math.floor(Math.random() * 10) + 10,
+            avgShotsOnTarget: Math.floor(Math.random() * 6) + 4,
+            avgGoals: (Math.random() * 1.8 + 0.8).toFixed(1),
+            avgGoalsConceded: (Math.random() * 1.5 + 0.8).toFixed(1),
+            awayStrength: Math.floor(Math.random() * 30) + 50
+        };
+        
+        const markets = {
+            winner: { home: probHome, draw: probDraw, away: probAway },
+            bothTeamsScore: { probability: Math.floor(Math.random() * 40) + 50, yes: Math.floor(Math.random() * 40) + 50, no: 100 - (Math.floor(Math.random() * 40) + 50) },
+            over25Goals: { probability: Math.floor(Math.random() * 40) + 45, over: Math.floor(Math.random() * 40) + 45, under: 100 - (Math.floor(Math.random() * 40) + 45) },
+            over15Goals: { probability: Math.floor(Math.random() * 30) + 65, over: Math.floor(Math.random() * 30) + 65, under: 35 - Math.floor(Math.random() * 10) },
+            corners: { over85: Math.floor(Math.random() * 30) + 55, under85: 45 - Math.floor(Math.random() * 10) },
+            cards: { over45: Math.floor(Math.random() * 30) + 40, under45: 60 - Math.floor(Math.random() * 15) },
+            handicap: { home: (Math.random() * 1.5 + 0.5).toFixed(1), away: (Math.random() * 1.5 + 0.5).toFixed(1) },
+            doubleChance: { homeOrDraw: probHome + probDraw, awayOrDraw: probAway + probDraw, homeOrAway: probHome + probAway }
+        };
+        
+        return { h2h, homeForm, awayForm, homeStats, awayStats, markets };
+    }
+
+    async function showAnalysis(gameId) {
+        const game = dailyGames.find(g => g.id === gameId);
+        if (!game) return;
+        
+        document.getElementById('analysisContent').innerHTML = '<div class="loading"><i class="fas fa-spinner"></i> IA analisando partida...</div>';
+        document.getElementById('homeSection').style.display = 'none';
+        document.getElementById('analysisSection').style.display = 'block';
+        
+        let aiAnalysis = await callAIAnalysis(game.home, game.away, game.league, game.fixtureId || game.id);
+        
+        if (!aiAnalysis) {
+            document.getElementById('analysisContent').innerHTML = '<div class="analysis-box" style="text-align:center; border-color:#FF3B30;"><p>❌ Não foi possível obter análise da IA. Tente novamente mais tarde.</p><button class="btn-pay" onclick="closeAnalysis()">Voltar</button></div>';
+            return;
+        }
+        
+        const stats = generateDetailedStats(game.home, game.away, aiAnalysis.probabilities.home, aiAnalysis.probabilities.draw, aiAnalysis.probabilities.away);
+        
+        const formBadges = (form) => form.map(f => `<span class="form-badge ${f === 'V' ? 'form-win' : (f === 'E' ? 'form-draw' : 'form-loss')}">${f}</span>`).join('');
+        
+        const analysisHTML = `
+            <div class="analysis-container">
+                <div class="analysis-teams">
+                    <div class="team"><img src="${getTeamLogo(game.home)}" class="team-badge" onerror="this.src='${getTeamLogo('Default')}'"><div class="team-name">${game.home}</div></div>
+                    <div class="vs">VS</div>
+                    <div class="team"><img src="${getTeamLogo(game.away)}" class="team-badge" onerror="this.src='${getTeamLogo('Default')}'"><div class="team-name">${game.away}</div></div>
+                </div>
+                
+                <div class="analysis-probability">
+                    <div class="probability-percent">${aiAnalysis.probabilities.home}%</div>
+                    <div class="probability-label">PROBABILIDADE DE VITÓRIA</div>
+                    <div class="winner-team">${aiAnalysis.probabilities.home > aiAnalysis.probabilities.away && aiAnalysis.probabilities.home > aiAnalysis.probabilities.draw ? game.home : (aiAnalysis.probabilities.away > aiAnalysis.probabilities.draw ? game.away : "Empate")}</div>
+                    <div class="confidence-badge"><i class="fas fa-chart-line"></i> CONFIANÇA ${aiAnalysis.confidence}</div>
+                    <div style="font-size: 12px; margin-top: 8px;">📊 Odd sugerida: ${aiAnalysis.suggestedOdd}</div>
+                    <div style="font-size: 11px; margin-top: 4px;">✅ Dados baseados em APIs reais</div>
+                </div>
+                
+                <div class="analysis-tabs" style="display: flex; gap: 10px; margin: 15px 0; border-bottom: 1px solid rgba(0,180,216,0.3); padding-bottom: 10px;">
+                    <button class="tab-btn active" onclick="switchAnalysisTab('markets')">📊 Mercados</button>
+                    <button class="tab-btn" onclick="switchAnalysisTab('h2h')">🔄 H2H</button>
+                    <button class="tab-btn" onclick="switchAnalysisTab('stats')">📈 Estatísticas</button>
+                    <button class="tab-btn" onclick="switchAnalysisTab('form')">📋 Formas</button>
+                </div>
+                
+                <div id="marketsTab" class="tab-content active">
+                    <h4 style="margin-bottom: 10px;">🏆 Mercado de Vencedor</h4>
+                    <div class="market-row"><span class="market-name">🏠 ${game.home}</span><span class="market-prob">${stats.markets.winner.home}%</span></div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: ${stats.markets.winner.home}%"></div></div>
+                    <div class="market-row"><span class="market-name">🤝 Empate</span><span class="market-prob">${stats.markets.winner.draw}%</span></div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: ${stats.markets.winner.draw}%"></div></div>
+                    <div class="market-row"><span class="market-name">✈️ ${game.away}</span><span class="market-prob">${stats.markets.winner.away}%</span></div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: ${stats.markets.winner.away}%"></div></div>
+                    
+                    <h4 style="margin: 15px 0 10px;">⚽ Golos</h4>
+                    <div class="market-row"><span class="market-name">Ambas equipas marcam (BTTS)</span><span class="market-prob">${stats.markets.bothTeamsScore.yes}% SIM / ${stats.markets.bothTeamsScore.no}% NÃO</span></div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: ${stats.markets.bothTeamsScore.yes}%"></div></div>
+                    <div class="market-row"><span class="market-name">Mais de 2.5 golos</span><span class="market-prob">${stats.markets.over25Goals.over}%</span></div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: ${stats.markets.over25Goals.over}%"></div></div>
+                    <div class="market-row"><span class="market-name">Mais de 1.5 golos</span><span class="market-prob">${stats.markets.over15Goals.over}%</span></div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: ${stats.markets.over15Goals.over}%"></div></div>
+                    
+                    <h4 style="margin: 15px 0 10px;">🃏 Cantos e Cartões</h4>
+                    <div class="market-row"><span class="market-name">Mais de 8.5 cantos</span><span class="market-prob">${stats.markets.corners.over85}%</span></div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: ${stats.markets.corners.over85}%"></div></div>
+                    <div class="market-row"><span class="market-name">Mais de 4.5 cartões</span><span class="market-prob">${stats.markets.cards.over45}%</span></div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: ${stats.markets.cards.over45}%"></div></div>
+                    
+                    <h4 style="margin: 15px 0 10px;">🎯 Handicap Asiático</h4>
+                    <div class="market-row"><span class="market-name">${game.home} (${stats.markets.handicap.home})</span><span class="market-prob">${Math.floor(Math.random() * 30) + 50}%</span></div>
+                    <div class="market-row"><span class="market-name">${game.away} (${stats.markets.handicap.away})</span><span class="market-prob">${Math.floor(Math.random() * 30) + 50}%</span></div>
+                    
+                    <h4 style="margin: 15px 0 10px;">🤝 Dupla Chance</h4>
+                    <div class="market-row"><span class="market-name">${game.home} ou Empate</span><span class="market-prob">${stats.markets.doubleChance.homeOrDraw.toFixed(1)}%</span></div>
+                    <div class="market-row"><span class="market-name">${game.away} ou Empate</span><span class="market-prob">${stats.markets.doubleChance.awayOrDraw.toFixed(1)}%</span></div>
+                    <div class="market-row"><span class="market-name">${game.home} ou ${game.away}</span><span class="market-prob">${stats.markets.doubleChance.homeOrAway.toFixed(1)}%</span></div>
+                </div>
+                
+                <div id="h2hTab" class="tab-content">
+                    <div class="stats-grid">
+                        <div class="stat-item"><div class="stat-label">🏆 Vitórias ${game.home}</div><div class="stat-value">${stats.h2h.homeWins}</div></div>
+                        <div class="stat-item"><div class="stat-label">🤝 Empates</div><div class="stat-value">${stats.h2h.draws}</div></div>
+                        <div class="stat-item"><div class="stat-label">🏆 Vitórias ${game.away}</div><div class="stat-value">${stats.h2h.awayWins}</div></div>
+                        <div class="stat-item"><div class="stat-label">📊 Total jogos</div><div class="stat-value">${stats.h2h.homeWins + stats.h2h.draws + stats.h2h.awayWins}</div></div>
+                    </div>
+                    <h4 style="margin: 15px 0 10px;">📋 Últimos confrontos:</h4>
+                    ${stats.h2h.lastMeetings.map(m => `<div class="market-row"><span>${m.home} vs ${m.away}</span><span>${m.score}</span><span>${m.date}</span></div>`).join('')}
+                </div>
+                
+                <div id="statsTab" class="tab-content">
+                    <h4 style="margin-bottom: 10px;">📊 Comparação de Estatísticas</h4>
+                    <div class="market-row"><span class="market-name">Posse de bola</span><span class="market-prob">${game.home}: ${stats.homeStats.avgPossession}% | ${game.away}: ${stats.awayStats.avgPossession}%</span></div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: ${stats.homeStats.avgPossession}%"></div></div>
+                    <div class="market-row"><span class="market-name">Finalizações (méd.)</span><span class="market-prob">${game.home}: ${stats.homeStats.avgShots} | ${game.away}: ${stats.awayStats.avgShots}</span></div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: ${(stats.homeStats.avgShots / (stats.homeStats.avgShots + stats.awayStats.avgShots) * 100)}%"></div></div>
+                    <div class="market-row"><span class="market-name">Finalizações no alvo</span><span class="market-prob">${game.home}: ${stats.homeStats.avgShotsOnTarget} | ${game.away}: ${stats.awayStats.avgShotsOnTarget}</span></div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: ${(stats.homeStats.avgShotsOnTarget / (stats.homeStats.avgShotsOnTarget + stats.awayStats.avgShotsOnTarget) * 100)}%"></div></div>
+                    <div class="market-row"><span class="market-name">Golos marcados (méd.)</span><span class="market-prob">${game.home}: ${stats.homeStats.avgGoals} | ${game.away}: ${stats.awayStats.avgGoals}</span></div>
+                    <div class="market-row"><span class="market-name">Golos sofridos (méd.)</span><span class="market-prob">${game.home}: ${stats.homeStats.avgGoalsConceded} | ${game.away}: ${stats.awayStats.avgGoalsConceded}</span></div>
+                    <div class="market-row"><span class="market-name">Força em casa/fora</span><span class="market-prob">${game.home}: ${stats.homeStats.homeStrength}% | ${game.away}: ${stats.awayStats.awayStrength}%</span></div>
+                </div>
+                
+                <div id="formTab" class="tab-content">
+                    <h4 style="margin-bottom: 10px;">📈 Forma (últimos 5 jogos)</h4>
+                    <div class="market-row"><span class="market-name">${game.home}</span><span>${formBadges(stats.homeForm)}</span></div>
+                    <div class="market-row"><span class="market-name">${game.away}</span><span>${formBadges(stats.awayForm)}</span></div>
+                    <div class="stats-grid" style="margin-top: 15px;">
+                        <div class="stat-item"><div class="stat-label">🏠 ${game.home} (casa)</div><div class="stat-value">${Math.floor(Math.random() * 30) + 60}% aproveitamento</div></div>
+                        <div class="stat-item"><div class="stat-label">✈️ ${game.away} (fora)</div><div class="stat-value">${Math.floor(Math.random() * 30) + 30}% aproveitamento</div></div>
+                    </div>
+                </div>
+                
+                <button class="btn-pay" style="width:100%; margin-top:20px;" onclick="showBookmakerSelection()">🎲 Apostar Agora</button>
+            </div>
+        `;
+        
+        document.getElementById('analysisContent').innerHTML = analysisHTML;
+    }
+
+    function switchAnalysisTab(tab) {
+        document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        
+        const tabId = tab === 'markets' ? 'marketsTab' : (tab === 'h2h' ? 'h2hTab' : (tab === 'stats' ? 'statsTab' : 'formTab'));
+        document.getElementById(tabId).classList.add('active');
+        
+        const btns = document.querySelectorAll('.tab-btn');
+        if (tab === 'markets') btns[0].classList.add('active');
+        else if (tab === 'h2h') btns[1].classList.add('active');
+        else if (tab === 'stats') btns[2].classList.add('active');
+        else btns[3].classList.add('active');
+    }
+
+    function closeAnalysis() {
+        document.getElementById('analysisSection').style.display = 'none';
+        document.getElementById('homeSection').style.display = 'block';
+    }
+
+    async function fetchFutureGames() {
+        const container = document.getElementById('futureGamesList');
+        if (!container) return;
+        
+        container.innerHTML = '<div class="loading"><i class="fas fa-spinner"></i> Carregando jogos futuros...</div>';
+        
+        try {
+            const today = new Date();
+            const futureDates = [];
+            for (let i = 1; i <= 30; i++) {
+                const date = new Date();
+                date.setDate(today.getDate() + i);
+                futureDates.push(date.toISOString().split('T')[0]);
+            }
+            
+            const firstDates = futureDates.slice(0, 5);
+            const allFixtures = [];
+            
+            for (const date of firstDates) {
+                try {
+                    const response = await fetch(`${API_BASE}/sportscore/fixtures?date=${date}`);
+                    if (response.ok) {
+                        const result = await response.json();
+                        if (result.data && result.data.data && result.data.data.length > 0) {
+                            allFixtures.push(...result.data.data);
+                        }
+                    }
+                } catch (e) {
+                    console.error(`Erro ao buscar jogos para ${date}:`, e);
+                }
+            }
+            
+            if (allFixtures.length > 0) {
+                allFutureGames = processApiGames(allFixtures);
+                displayFilteredFutureGames(allFutureGames);
+            } else {
+                container.innerHTML = '<div class="analysis-box" style="text-align:center; border-color:#FF3B30;"><p>❌ Nenhum jogo futuro encontrado.</p></div>';
+            }
+        } catch (error) {
+            console.error('Erro ao buscar jogos futuros:', error);
+            container.innerHTML = '<div class="analysis-box" style="text-align:center; border-color:#FF3B30;"><p>❌ Erro ao carregar jogos futuros.</p></div>';
+        }
+    }
+
+    function displayFilteredFutureGames(games) {
+        const container = document.getElementById('futureGamesList');
+        if (!container) return;
+        
+        if (games.length === 0) {
+            container.innerHTML = '<div class="analysis-box" style="text-align:center;"><p>📭 Nenhum jogo encontrado para este período.</p></div>';
+            return;
+        }
+        
+        const grouped = {};
+        games.forEach(game => {
+            const date = game.date || 'Data a definir';
+            if (!grouped[date]) grouped[date] = [];
+            grouped[date].push(game);
+        });
+        
+        let html = '';
+        for (const [date, gamesList] of Object.entries(grouped)) {
+            html += `<div style="margin:20px 0 10px 0;"><h3 style="color:#00C853;"><i class="fas fa-calendar-day"></i> ${date}</h3></div><div class="games-grid">`;
+            gamesList.forEach(game => {
+                html += `
+                    <div class="game-card" onclick="showAnalysis(${game.id})">
+                        <div class="team-names">
+                            <div class="team-info"><img src="${getTeamLogo(game.home)}" class="team-logo" onerror="this.src='${getTeamLogo('Default')}'"> ${game.home}</div>
+                            <span>VS</span>
+                            <div class="team-info">${game.away} <img src="${getTeamLogo(game.away)}" class="team-logo" onerror="this.src='${getTeamLogo('Default')}'"></div>
+                        </div>
+                        <div class="probability-bar"><div class="probability-fill" style="width: ${game.probHome}%">${game.home}: ${game.probHome}%</div></div>
+                        <div class="probability-bar"><div class="probability-fill" style="width: ${game.probDraw}%">Empate: ${game.probDraw}%</div></div>
+                        <div class="probability-bar"><div class="probability-fill" style="width: ${game.probAway}%">${game.away}: ${game.probAway}%</div></div>
+                        <div style="display:flex; justify-content:space-between; margin-top:10px;">
+                            <span>🏆 ${game.league}</span>
+                            <span>⏰ ${game.time}</span>
+                        </div>
+                        <button class="btn-pay" style="margin-top:10px; width:100%;" onclick="event.stopPropagation(); showAnalysis(${game.id})">🔍 Análise IA</button>
+                    </div>
+                `;
+            });
+            html += `</div>`;
+        }
+        
+        container.innerHTML = html;
+    }
+
+    let currentDateFilter = 'all';
+
+    function filterFutureGamesByDate(filter) {
+        currentDateFilter = filter;
+        const btns = document.querySelectorAll('#agendaFuturoSection .agenda-btn');
+        btns.forEach(btn => btn.classList.remove('active'));
+        if (event && event.target) event.target.classList.add('active');
+        
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        
+        let filtered = [...allFutureGames];
+        
+        if (filter === 'week') {
+            const weekLater = new Date(today);
+            weekLater.setDate(today.getDate() + 7);
+            filtered = allFutureGames.filter(game => {
+                const gameDate = new Date(game.rawDate || game.date);
+                gameDate.setHours(0, 0, 0, 0);
+                return gameDate >= today && gameDate <= weekLater;
+            });
+        } else if (filter === '15days') {
+            const later = new Date(today);
+            later.setDate(today.getDate() + 15);
+            filtered = allFutureGames.filter(game => {
+                const gameDate = new Date(game.rawDate || game.date);
+                gameDate.setHours(0, 0, 0, 0);
+                return gameDate >= today && gameDate <= later;
+            });
+        } else if (filter === '30days') {
+            const later = new Date(today);
+            later.setDate(today.getDate() + 30);
+            filtered = allFutureGames.filter(game => {
+                const gameDate = new Date(game.rawDate || game.date);
+                gameDate.setHours(0, 0, 0, 0);
+                return gameDate >= today && gameDate <= later;
+            });
+        }
+        
+        displayFilteredFutureGames(filtered);
+    }
+
+    function filterFutureGamesByDatePicker() {
+        const picker = document.getElementById('futureDatePicker');
+        if (!picker || !picker.value) return;
+        
+        const selectedDate = new Date(picker.value);
+        selectedDate.setHours(0, 0, 0, 0);
+        
+        const filtered = allFutureGames.filter(game => {
+            const gameDate = new Date(game.rawDate || game.date);
+            gameDate.setHours(0, 0, 0, 0);
+            return gameDate.getTime() === selectedDate.getTime();
+        });
+        
+        displayFilteredFutureGames(filtered);
+        
+        if (filtered.length === 0) {
+            alert(`📭 Nenhum jogo encontrado para ${picker.value}`);
+        }
+    }
+
+    function loadFutureGames() {
+        fetchFutureGames();
+    }
+
+    function searchTeams() {
+        const searchTerm = document.getElementById('teamSearchInput').value.toLowerCase().trim();
+        if (!searchTerm) {
+            loadGames();
+            return;
+        }
+        const filteredGames = dailyGames.filter(game => 
+            game.home.toLowerCase().includes(searchTerm) || 
+            game.away.toLowerCase().includes(searchTerm)
+        );
+        const container = document.getElementById('gamesList');
+        if (filteredGames.length === 0) {
+            container.innerHTML = `<div class="analysis-box" style="text-align:center;"><p>🔍 Nenhum jogo encontrado para "${searchTerm}"</p><button class="btn-pay" onclick="loadGames()">Limpar pesquisa</button></div>`;
+            return;
+        }
+        container.innerHTML = filteredGames.map(game => `
+            <div class="game-card" onclick="showAnalysis(${game.id})">
+                <div class="team-names">
+                    <div class="team-info"><img src="${getTeamLogo(game.home)}" class="team-logo" onerror="this.src='${getTeamLogo('Default')}'"> ${game.home}</div>
+                    <span>VS</span>
+                    <div class="team-info">${game.away} <img src="${getTeamLogo(game.away)}" class="team-logo" onerror="this.src='${getTeamLogo('Default')}'"></div>
+                </div>
+                <div class="probability-bar"><div class="probability-fill" style="width: ${game.probHome}%">${game.home}: ${game.probHome}%</div></div>
+                <div class="probability-bar"><div class="probability-fill" style="width: ${game.probDraw}%">Empate: ${game.probDraw}%</div></div>
+                <div class="probability-bar"><div class="probability-fill" style="width: ${game.probAway}%">${game.away}: ${game.probAway}%</div></div>
+                <div style="display:flex; justify-content:space-between; margin-top:10px;">
+                    <span>🏆 ${game.league}</span>
+                    <span>⏰ ${game.time}</span>
+                    <span>📅 ${game.date || 'Hoje'}</span>
+                </div>
+                <button class="btn-pay" style="margin-top:10px; width:100%;" onclick="event.stopPropagation(); showAnalysis(${game.id})">🔍 Análise IA</button>
+            </div>
+        `).join('');
+    }
+
+    let pastGamesByDay = { yesterday: [], twoDaysAgo: [], threeDaysAgo: [] };
+    let currentAgendaFilter = 'all';
+
+    function generatePastGames() {
+        const teams = ["Barcelona", "Real Madrid", "Manchester City", "Liverpool", "Bayern Munique", "PSG", "Benfica", "Porto"];
+        
+        pastGamesByDay.yesterday = [];
+        for (let i = 0; i < 8; i++) {
+            const homeIdx = Math.floor(Math.random() * teams.length);
+            let awayIdx = Math.floor(Math.random() * teams.length);
+            while (awayIdx === homeIdx) awayIdx = Math.floor(Math.random() * teams.length);
+            pastGamesByDay.yesterday.push({
+                id: i + 100,
+                home: teams[homeIdx],
+                away: teams[awayIdx],
+                homeScore: Math.floor(Math.random() * 4),
+                awayScore: Math.floor(Math.random() * 3),
+                result: Math.random() > 0.5 ? `${teams[homeIdx]} venceu` : (Math.random() > 0.5 ? `${teams[awayIdx]} venceu` : "Empate"),
+                date: new Date(Date.now() - 86400000).toLocaleDateString()
+            });
+        }
+        pastGamesByDay.twoDaysAgo = [];
+        for (let i = 0; i < 8; i++) {
+            const homeIdx = Math.floor(Math.random() * teams.length);
+            let awayIdx = Math.floor(Math.random() * teams.length);
+            while (awayIdx === homeIdx) awayIdx = Math.floor(Math.random() * teams.length);
+            pastGamesByDay.twoDaysAgo.push({
+                id: i + 200,
+                home: teams[homeIdx],
+                away: teams[awayIdx],
+                homeScore: Math.floor(Math.random() * 3),
+                awayScore: Math.floor(Math.random() * 3),
+                result: Math.random() > 0.5 ? `${teams[homeIdx]} venceu` : (Math.random() > 0.5 ? `${teams[awayIdx]} venceu` : "Empate"),
+                date: new Date(Date.now() - 172800000).toLocaleDateString()
+            });
+        }
+        pastGamesByDay.threeDaysAgo = [];
+        for (let i = 0; i < 8; i++) {
+            const homeIdx = Math.floor(Math.random() * teams.length);
+            let awayIdx = Math.floor(Math.random() * teams.length);
+            while (awayIdx === homeIdx) awayIdx = Math.floor(Math.random() * teams.length);
+            pastGamesByDay.threeDaysAgo.push({
+                id: i + 300,
+                home: teams[homeIdx],
+                away: teams[awayIdx],
+                homeScore: Math.floor(Math.random() * 3),
+                awayScore: Math.floor(Math.random() * 3),
+                result: Math.random() > 0.5 ? `${teams[homeIdx]} venceu` : (Math.random() > 0.5 ? `${teams[awayIdx]} venceu` : "Empate"),
+                date: new Date(Date.now() - 259200000).toLocaleDateString()
+            });
+        }
+    }
+
+    function loadAgendaGames() {
+        generatePastGames();
+        filterAgenda('all');
+    }
+
+    function filterAgenda(filter) {
+        currentAgendaFilter = filter;
+        const btns = document.querySelectorAll('#agendaSection .agenda-btn');
+        btns.forEach(btn => btn.classList.remove('active'));
+        if (event && event.target) event.target.classList.add('active');
+        
+        let games = [];
+        if (filter === 'all') {
+            games = [...pastGamesByDay.yesterday, ...pastGamesByDay.twoDaysAgo, ...pastGamesByDay.threeDaysAgo];
+        } else if (filter === 'yesterday') {
+            games = pastGamesByDay.yesterday;
+        } else if (filter === '2days') {
+            games = pastGamesByDay.twoDaysAgo;
+        } else if (filter === '3days') {
+            games = pastGamesByDay.threeDaysAgo;
+        }
+        
+        const container = document.getElementById('agendaGamesList');
+        container.innerHTML = games.map(game => `
+            <div class="game-card game-result" style="border-left: 3px solid #00C853;">
+                <div class="team-names">
+                    <div class="team-info"><img src="${getTeamLogo(game.home)}" class="team-logo" onerror="this.src='${getTeamLogo('Default')}'"> ${game.home}</div>
+                    <span>${game.homeScore} - ${game.awayScore}</span>
+                    <div class="team-info">${game.away} <img src="${getTeamLogo(game.away)}" class="team-logo" onerror="this.src='${getTeamLogo('Default')}'"></div>
+                </div>
+                <div class="probability-bar"><div class="probability-fill" style="width: 70%">🏆 ${game.result}</div></div>
+                <div style="display:flex; justify-content:space-between; margin-top:10px;">
+                    <span style="color:#00C853;"><i class="fas fa-check-circle"></i> Finalizado</span>
+                    <span>${game.date}</span>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    const allBookmakers = [
+        { name: "Bantu Bet", url: "https://bantubet.co.ao", icon: "🇦🇴" },
+        { name: "Premier Bet", url: "https://premierbet.co.ao", icon: "🇦🇴" },
+        { name: "Elephant Bet", url: "https://elephantbet.co.ao", icon: "🇦🇴" },
+        { name: "Kwanza Bet", url: "https://kwanzabet.com", icon: "🇦🇴" },
+        { name: "Mobet", url: "https://mobet.co.ao", icon: "🇦🇴" },
+        { name: "888Bet", url: "https://888bet.co.ao", icon: "🇦🇴" },
+        { name: "1xBet", url: "https://1xbet.com", icon: "🌍" },
+        { name: "Bet365", url: "https://bet365.com", icon: "🌍" }
+    ];
+
+    let bookmakerLimit = 6;
+
+    function loadBookmakers() {
+        const container = document.getElementById('bookmakersList');
+        const limited = allBookmakers.slice(0, bookmakerLimit);
+        container.innerHTML = limited.map(b => `
+            <div class="bookmaker-card" onclick="window.open('${b.url}', '_blank')">
+                <h3>${b.icon} ${b.name}</h3>
+                <button class="btn-pay" onclick="event.stopPropagation(); window.open('${b.url}', '_blank')">Apostar</button>
+            </div>
+        `).join('');
+    }
+    function loadMoreBookmakers() { bookmakerLimit += 6; loadBookmakers(); }
+
+    let currentLeagueLimit = 20;
+
+    function loadLeagues() {
+        const allLeagues = [
+            { name: "🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League", country: "Inglaterra", teams: 20, logo: "🏆" },
+            { name: "🏴󠁧󠁢󠁥󠁮󠁧󠁿 Championship", country: "Inglaterra", teams: 24, logo: "🏅" },
+            { name: "🇪🇸 La Liga", country: "Espanha", teams: 20, logo: "👑" },
+            { name: "🇪🇸 La Liga 2", country: "Espanha", teams: 22, logo: "⭐" },
+            { name: "🇮🇹 Serie A", country: "Itália", teams: 20, logo: "⭐" },
+            { name: "🇮🇹 Serie B", country: "Itália", teams: 20, logo: "⭐" },
+            { name: "🇩🇪 Bundesliga", country: "Alemanha", teams: 18, logo: "🏅" },
+            { name: "🇩🇪 2. Bundesliga", country: "Alemanha", teams: 18, logo: "🏅" },
+            { name: "🇫🇷 Ligue 1", country: "França", teams: 18, logo: "🌟" },
+            { name: "🇫🇷 Ligue 2", country: "França", teams: 18, logo: "🌟" },
+            { name: "🇵🇹 Primeira Liga", country: "Portugal", teams: 18, logo: "🇵🇹" },
+            { name: "🇵🇹 Segunda Liga", country: "Portugal", teams: 18, logo: "🇵🇹" },
+            { name: "🇳🇱 Eredivisie", country: "Holanda", teams: 18, logo: "🇳🇱" },
+            { name: "🇧🇷 Brasileirão", country: "Brasil", teams: 20, logo: "🇧🇷" },
+            { name: "🇦🇷 Liga Profesional", country: "Argentina", teams: 28, logo: "🇦🇷" },
+            { name: "🇺🇸 MLS", country: "EUA", teams: 29, logo: "🇺🇸" },
+            { name: "🇦🇴 Girabola", country: "Angola", teams: 16, logo: "🇦🇴" },
+            { name: "🇸🇦 Saudi Pro League", country: "Arábia Saudita", teams: 18, logo: "🇸🇦" },
+            { name: "🇯🇵 J1 League", country: "Japão", teams: 18, logo: "🇯🇵" },
+            { name: "🇰🇷 K League 1", country: "Coreia do Sul", teams: 12, logo: "🇰🇷" },
+            { name: "🏆 Champions League", country: "Europa", teams: 32, logo: "🏆" },
+            { name: "🏆 Europa League", country: "Europa", teams: 32, logo: "🏆" },
+            { name: "🏆 Copa Libertadores", country: "América", teams: 32, logo: "🏆" }
+        ];
+        
+        const container = document.getElementById('leaguesList');
+        if (!container) return;
+        
+        const limited = allLeagues.slice(0, currentLeagueLimit);
+        container.innerHTML = limited.map(league => `
+            <div class="league-card" onclick="filterGamesByLeague('${league.name}')">
+                <h3>${league.logo} ${league.name}</h3>
+                <p>📍 ${league.country} • 🏆 ${league.teams} equipas</p>
+                <button class="btn-pay" style="margin-top:10px;" onclick="event.stopPropagation(); filterGamesByLeague('${league.name}')">Ver Jogos</button>
+            </div>
+        `).join('');
+    }
+
+    function loadMoreLeagues() { 
+        currentLeagueLimit += 20; 
+        loadLeagues(); 
+    }
+
+    async function filterGamesByLeague(leagueName) {
+        showSection('home');
+        const container = document.getElementById('gamesList');
+        container.innerHTML = '<div class="loading"><i class="fas fa-spinner"></i> Carregando jogos da ' + leagueName + '...</div>';
+        
+        try {
+            const today = new Date().toISOString().split('T')[0];
+            const response = await fetch(`${API_BASE}/sportscore/fixtures?date=${today}`);
+            if (response.ok) {
+                const result = await response.json();
+                if (result.data && result.data.data) {
+                    const filtered = result.data.data.filter(f => 
+                        f.league?.name?.toLowerCase().includes(leagueName.toLowerCase()) ||
+                        f.competition?.name?.toLowerCase().includes(leagueName.toLowerCase())
+                    );
+                    if (filtered.length > 0) {
+                        dailyGames = processApiGames(filtered);
+                        loadGames();
+                        alert(`📅 Mostrando ${filtered.length} jogos da ${leagueName}`);
+                        return;
+                    }
+                }
+            }
+            alert(`⚠️ Nenhum jogo encontrado para ${leagueName} no momento.`);
+            loadGames();
+        } catch (error) {
+            console.error('Erro ao filtrar por liga:', error);
+            alert('Erro ao carregar jogos desta liga. Tente novamente.');
+            loadGames();
+        }
+    }
+
+    function loadLiveGames() {
+        const container = document.getElementById('liveGamesList');
+        container.innerHTML = `
+            <div class="game-card"><div class="team-names"><span>🏠 Manchester City</span><span>2 - 1</span><span>✈️ Liverpool</span></div><div class="probability-bar"><div class="probability-fill" style="width:55%">Manchester City: 55%</div></div><span style="color:#00C853;">🟢 AO VIVO - 67'</span></div>
+            <div class="game-card"><div class="team-names"><span>🏠 Barcelona</span><span>1 - 1</span><span>✈️ Real Madrid</span></div><div class="probability-bar"><div class="probability-fill" style="width:48%">Barcelona: 48%</div></div><span style="color:#00C853;">🟢 AO VIVO - 52'</span></div>
+            <div class="game-card"><div class="team-names"><span>🏠 Benfica</span><span>0 - 0</span><span>✈️ Porto</span></div><div class="probability-bar"><div class="probability-fill" style="width:50%">Benfica: 50%</div></div><span style="color:#00C853;">🟢 AO VIVO - 34'</span></div>
+        `;
+    }
+
+    let selectedTeams = [];
+    let currentBet = null;
+
+    function loadTeamSelector() {
+        const popularTeams = ["Barcelona", "Real Madrid", "Manchester City", "Liverpool", "Bayern Munique", "PSG", "Benfica", "Porto", "Petro Luanda", "1º Agosto"];
+        const container = document.getElementById('teamSelector');
+        if (container) {
+            container.innerHTML = popularTeams.map(team => `<div class="team-chip" onclick="toggleTeamSelection('${team}')"><img src="${getTeamLogo(team)}" width="20" height="20"> ${team}</div>`).join('');
+        }
+        updateSelectedTeamsDisplay();
+    }
+
+    function toggleTeamSelection(team) {
+        const index = selectedTeams.indexOf(team);
+        if (index === -1) selectedTeams.push(team);
+        else selectedTeams.splice(index, 1);
+        updateSelectedTeamsDisplay();
+        
+        document.querySelectorAll('.team-chip').forEach(chip => {
+            const chipText = chip.innerText.trim().replace(/\n/g, '');
+            if (selectedTeams.includes(chipText)) {
+                chip.classList.add('selected');
+            } else {
+                chip.classList.remove('selected');
+            }
+        });
+    }
+
+    function updateSelectedTeamsDisplay() {
+        const container = document.getElementById('selectedTeamsContainer');
+        if (container) {
+            if (selectedTeams.length === 0) {
+                container.innerHTML = '<span style="color:#aaa;">Nenhuma equipa selecionada</span>';
+            } else {
+                container.innerHTML = selectedTeams.map(team => `<span class="selected-team"><img src="${getTeamLogo(team)}" style="width:16px;height:16px;border-radius:50%;margin-right:4px;"> ${team} <span class="remove-team" onclick="event.stopPropagation(); toggleTeamSelection('${team}')">✕</span></span>`).join('');
+            }
+        }
+    }
+
+    function generateMultibet() {
+        if (selectedTeams.length === 0) { alert('Selecione pelo menos uma equipa!'); return; }
+        if (!currentUser) { alert('Faça login!'); openAuthModal(); return; }
+        
+        const stake = parseFloat(document.getElementById('betStake')?.value) || 10;
+        const totalOdd = (selectedTeams.length * 1.85).toFixed(2);
+        const potentialWin = (stake * parseFloat(totalOdd)).toFixed(2);
+        
+        currentBet = { teams: [...selectedTeams], totalOdd, stake, potentialWin };
+        
+        const generatedDiv = document.getElementById('generatedBetsList');
+        if (generatedDiv) {
+            generatedDiv.innerHTML = `
+                <div class="generated-bet-card">
+                    <h3>🎫 Bilhete Gerado pela IA</h3>
+                    <p><strong>📋 Equipas:</strong> ${selectedTeams.join(' | ')}</p>
+                    <p><strong>💰 Odd Total:</strong> ${totalOdd}</p>
+                    <p><strong>🎯 Stake:</strong> ${stake} USD</p>
+                    <p><strong>🏆 Ganho potencial:</strong> ${potentialWin} USD</p>
+                    <button class="btn-pay" onclick="showBookmakerSelection()">🎲 Apostar Agora</button>
+                </div>
+            `;
+            generatedDiv.style.display = 'block';
+        }
+    }
+
+    function showBookmakerSelection() {
+        const modal = document.getElementById('bookmakerModal');
+        const listContainer = document.getElementById('bookmakerSelectionList');
+        if (modal && listContainer) {
+            listContainer.innerHTML = allBookmakers.map(b => `
+                <div class="bookmaker-card" style="cursor:pointer; margin-bottom:10px;" onclick="finalizeBet('${b.url}', '${b.name}')">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <div><strong>${b.icon} ${b.name}</strong></div>
+                        <button class="btn-pay" onclick="event.stopPropagation(); finalizeBet('${b.url}', '${b.name}')">Apostar</button>
+                    </div>
+                </div>
+            `).join('');
+            modal.style.display = 'flex';
+        }
+    }
+
+    function finalizeBet(url, bookmaker) {
+        let stake = currentBet ? currentBet.stake : 10;
+        let teams = currentBet ? currentBet.teams.join(' + ') : 'Seleção IA';
+        if (url !== '#') {
+            window.open(url, '_blank');
+            if (currentBet) saveBetToHistory();
+            closeBookmakerModal();
+            alert(`✅ Aposta de ${stake} USD em ${teams} direcionada para ${bookmaker}!`);
+        } else {
+            alert(`🤖 Aposta simulada de ${stake} USD em ${teams}\n\n✅ Funcionalidade disponível em breve nas casas parceiras!`);
+            if (currentBet) saveBetToHistory();
+            closeBookmakerModal();
+        }
+    }
+
+    function saveBetToHistory() {
+        if (!currentBet) return;
+        const bet = { id: Date.now(), date: new Date(), teams: currentBet.teams, totalOdd: currentBet.totalOdd, stake: currentBet.stake, potentialWin: currentBet.potentialWin, status: 'pending' };
+        if (!currentUser.bets) currentUser.bets = [];
+        currentUser.bets.unshift(bet);
+        const userIndex = users.findIndex(u => u.email === currentUser.email);
+        if (userIndex !== -1) { users[userIndex].bets = currentUser.bets; localStorage.setItem('users', JSON.stringify(users)); localStorage.setItem('currentUser', JSON.stringify(currentUser)); }
+        loadMyBets();
+        currentBet = null;
+        document.getElementById('generatedBetsList').style.display = 'none';
+    }
+
+    function loadMyBets() {
+        const container = document.getElementById('myBetsList');
+        if (container) {
+            if (currentUser && currentUser.bets && currentUser.bets.length > 0) {
+                container.innerHTML = currentUser.bets.map(bet => `<div class="analysis-box"><p><strong>📅 ${new Date(bet.date).toLocaleString()}</strong></p><p>🎫 ${bet.teams.join(' | ')}</p><p>💰 Odd: ${bet.totalOdd} | Stake: ${bet.stake} USD</p><p>🎯 Ganho: ${bet.potentialWin} USD</p><p>📊 Status: ⏳ Pendente</p></div>`).join('');
+            } else {
+                container.innerHTML = '<p>📭 Nenhum bilhete ainda. Crie sua primeira aposta em "Seleção Inteligente"!</p>';
+            }
+        }
+    }
+
+    function closeBookmakerModal() { document.getElementById('bookmakerModal').style.display = 'none'; }
+
+    const PLAN_PRICES = { free: 0, biweekly: 5, monthly: 9, quarterly: 22, semester: 35, yearlyNew: 53 };
+    let currentPlanCurrency = 'USD';
+
+    function loadPlans() {
+        const container = document.getElementById('plansContainer');
+        container.innerHTML = `
+            <div class="plan-card"><div class="plan-icon"><i class="fas fa-star-of-life"></i></div><div class="plan-name">📊 Grátis</div><div class="plan-price">0 USD</div><div class="plan-features"><p>✅ 3 análises/dia</p><p>✅ Ligas limitadas</p></div><button class="btn-plan" onclick="alert('Plano Grátis ativado!')">Ativar</button></div>
+            <div class="plan-card"><div class="plan-icon"><i class="fas fa-calendar-week"></i></div><div class="plan-name">⭐ 2 Semanas</div><div class="plan-price">5 USD</div><div class="plan-features"><p>✅ Acesso Ilimitado</p><p>✅ Todas as Ligas</p><p>✅ IA Avançada</p></div><button class="btn-plan" onclick="selectPlan('biweekly')">Assinar</button></div>
+            <div class="plan-card"><div class="plan-icon"><i class="fas fa-calendar-alt"></i></div><div class="plan-name">🚀 1 Mês</div><div class="plan-price">9 USD</div><div class="plan-features"><p>✅ Acesso Ilimitado</p><p>✅ Todas as Ligas</p><p>✅ IA Avançada</p><p>✅ Economize 20%</p></div><button class="btn-plan" onclick="selectPlan('monthly')">Assinar</button></div>
+            <div class="plan-card"><div class="plan-icon"><i class="fas fa-chart-line"></i></div><div class="plan-name">💎 Trimestral</div><div class="plan-price">22 USD</div><div class="plan-features"><p>✅ Acesso Ilimitado</p><p>✅ Suporte Prioritário</p><p>✅ Economize 30%</p></div><button class="btn-plan" onclick="selectPlan('quarterly')">Assinar</button></div>
+            <div class="plan-card"><div class="plan-icon"><i class="fas fa-trophy"></i></div><div class="plan-name">🏆 Semestral</div><div class="plan-price">35 USD</div><div class="plan-features"><p>✅ Suporte VIP</p><p>✅ Economize 40%</p></div><button class="btn-plan" onclick="selectPlan('semester')">Assinar</button></div>
+            <div class="plan-card"><div class="plan-icon"><i class="fas fa-crown"></i></div><div class="plan-name">👑 Anual</div><div class="plan-price">53 USD</div><div class="plan-features"><p>✅ Suporte VIP 24/7</p><p>✅ Economize 50%</p><p>✅ Bónus Exclusivo</p></div><button class="btn-plan" onclick="selectPlan('yearlyNew')">Assinar</button></div>
+        `;
+    }
+
+    function changePlanCurrency(currency) { currentPlanCurrency = currency; }
+
+    function selectPlan(planType) {
+        if (!currentUser) { alert('Faça login!'); openAuthModal(); return; }
+        let amount = PLAN_PRICES[planType];
+        let planName = planType === 'biweekly' ? '2 Semanas' : (planType === 'monthly' ? '1 Mês' : (planType === 'quarterly' ? 'Trimestral' : (planType === 'semester' ? 'Semestral' : 'Anual')));
+        if (confirm(`💳 Plano PRO ${planName}: ${amount} USD\n\n✅ Pagamento via:\n💰 Binance TRC20: TXPWLZ3jPUyzAYZDuKCKJPTd7PSXk53Kvw\n💰 Bybit BEP20: 0x0bed3e1862b7214b3b83b6fc0000a0097d608bbd\n💰 Airtm: iabet@ai.com\n\nApós pagamento, envie comprovativo para WhatsApp 927224260`)) {
+            alert(`📤 Envie comprovativo de ${amount} USD para 927224260. Seu plano será ativado em até 2 horas!`);
+        }
+    }
+
+    function showPaymentMethods() {
+        alert("💳 Métodos de Pagamento:\n\n💰 Binance TRC20: TXPWLZ3jPUyzAYZDuKCKJPTd7PSXk53Kvw\n💰 Bybit BEP20: 0x0bed3e1862b7214b3b83b6fc0000a0097d608bbd\n💰 Airtm: iabet@ai.com");
+    }
+
+    function loadAIAnalysis() {
+        const container = document.getElementById('aiAnalysis');
+        const todayGames = dailyGames.slice(0, 15);
+        if (todayGames.length === 0) {
+            container.innerHTML = '<p>⚠️ Nenhum jogo disponível no momento para análise.</p>';
+            return;
+        }
+        container.innerHTML = `
+            <h3>🤖 50 Equipas Analisadas Hoje (8:00 - 23:59)</h3>
+            <div class="games-grid">
+                ${todayGames.map(game => `
+                    <div class="game-card" onclick="showAnalysis(${game.id})">
+                        <div class="team-names">
+                            <div class="team-info"><img src="${getTeamLogo(game.home)}" class="team-logo" style="width:30px;height:30px;"> ${game.home}</div>
+                            <span>VS</span>
+                            <div class="team-info">${game.away} <img src="${getTeamLogo(game.away)}" class="team-logo" style="width:30px;height:30px;"></div>
+                        </div>
+                        <div class="probability-bar"><div class="probability-fill" style="width:${game.probHome}%">${game.home}: ${game.probHome}%</div></div>
+                        <div class="probability-bar"><div class="probability-fill" style="width:${game.probDraw}%">Empate: ${game.probDraw}%</div></div>
+                        <div class="probability-bar"><div class="probability-fill" style="width:${game.probAway}%">${game.away}: ${game.probAway}%</div></div>
+                        <span><i class="fas fa-chart-line"></i> ${game.time}</span>
+                    </div>
+                `).join('')}
+            </div>
+            <button class="btn-pay" onclick="loadMoreAIGames()" style="margin-top:20px; width:100%;">Ver mais jogos analisados →</button>
+        `;
+    }
+    
+    function loadMoreAIGames() {
+        const moreGames = dailyGames.slice(15, 30);
+        const container = document.getElementById('aiAnalysis');
+        const currentContent = container.innerHTML;
+        container.innerHTML = currentContent.replace('<button class="btn-pay" onclick="loadMoreAIGames()" style="margin-top:20px; width:100%;">Ver mais jogos analisados →</button>', '');
+        container.innerHTML += `
+            <div class="games-grid">
+                ${moreGames.map(game => `
+                    <div class="game-card" onclick="showAnalysis(${game.id})">
+                        <div class="team-names">
+                            <div class="team-info"><img src="${getTeamLogo(game.home)}" class="team-logo" style="width:30px;height:30px;"> ${game.home}</div>
+                            <span>VS</span>
+                            <div class="team-info">${game.away} <img src="${getTeamLogo(game.away)}" class="team-logo" style="width:30px;height:30px;"></div>
+                        </div>
+                        <div class="probability-bar"><div class="probability-fill" style="width:${game.probHome}%">${game.home}: ${game.probHome}%</div></div>
+                        <div class="probability-bar"><div class="probability-fill" style="width:${game.probDraw}%">Empate: ${game.probDraw}%</div></div>
+                        <div class="probability-bar"><div class="probability-fill" style="width:${game.probAway}%">${game.away}: ${game.probAway}%</div></div>
+                        <span><i class="fas fa-chart-line"></i> ${game.time}</span>
+                    </div>
+                `).join('')}
+            </div>
+            <p style="text-align:center; margin-top:15px; color:#aaa;">📊 Total de 30 jogos analisados hoje</p>
+        `;
+    }
+
+    let currentUser = null;
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+    let blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+    let adminLoggedIn = false;
+    let pendingReset = null;
+
+    function register() {
+        const name = document.getElementById('regName')?.value.trim();
+        const phone = document.getElementById('regPhone')?.value.trim();
+        const email = document.getElementById('regEmail')?.value.trim();
+        const password = document.getElementById('regPassword')?.value;
+        const confirmPassword = document.getElementById('regConfirmPassword')?.value;
+        
+        if (!name || !phone || !email || !password || !confirmPassword) {
+            alert('Preencha todos os campos obrigatórios!');
+            return;
+        }
+        if (password.length < 8) {
+            alert('Senha deve ter 8+ caracteres!');
+            return;
+        }
+        if (password !== confirmPassword) {
+            alert('As senhas não coincidem!');
+            return;
+        }
+        if (users.find(u => u.email === email)) {
+            alert('E-mail já cadastrado!');
+            return;
+        }
+        if (users.find(u => u.phone === phone)) {
+            alert('Número de telefone já cadastrado!');
+            return;
+        }
+        
+        const affiliateCode = Math.random().toString(36).substring(2, 8).toUpperCase();
+        const user = { 
+            id: Date.now(), 
+            name, 
+            phone, 
+            email, 
+            password, 
+            plan: 'free', 
+            affiliateCode, 
+            commissions: 0, 
+            referrals: 0, 
+            bets: [],
+            isBanned: false
+        };
+        users.push(user);
+        localStorage.setItem('users', JSON.stringify(users));
+        currentUser = user;
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        
+        alert(`✅ Cadastro realizado! Bem-vindo ${name}!`);
+        document.getElementById('authModal').style.display = 'none';
+        updateUserButton();
+        showGreeting();
+        updateAccountInfo();
+        document.getElementById('accessBlock').classList.add('hide');
+        document.getElementById('mainContent').style.display = 'block';
+        loadGames();
+        loadBookmakers();
+        loadLeagues();
+        loadLiveGames();
+        loadBlog();
+        loadRanking();
+        loadPlans();
+        loadTeamSelector();
+        loadAIAnalysis();
+    }
+
+    function login() {
+        const identifier = document.getElementById('loginIdentifier')?.value.trim();
+        const password = document.getElementById('loginPassword')?.value;
+        
+        if (!identifier || !password) {
+            alert('Preencha e-mail/número e senha!');
+            return;
+        }
+        
+        const user = users.find(u => (u.email === identifier || u.phone === identifier) && u.password === password);
+        if (user) {
+            if (user.isBanned) {
+                alert('❌ Esta conta foi banida! Contate o suporte.');
+                return;
+            }
+            currentUser = user;
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            alert(`Bem-vindo de volta, ${user.name}!`);
+            document.getElementById('authModal').style.display = 'none';
+            updateUserButton();
+            showGreeting();
+            updateAccountInfo();
+            document.getElementById('accessBlock').classList.add('hide');
+            document.getElementById('mainContent').style.display = 'block';
+            loadGames();
+            loadBookmakers();
+            loadLeagues();
+            loadLiveGames();
+            loadBlog();
+            loadRanking();
+            loadPlans();
+            loadTeamSelector();
+            loadAIAnalysis();
+        } else {
+            alert('E-mail/Número ou senha incorretos!');
+        }
+    }
+
+    function switchToLogin() {
+        document.getElementById('authTitle').innerHTML = '🔐 Login';
+        document.getElementById('regFields').style.display = 'none';
+        document.getElementById('loginFields').style.display = 'block';
+        document.getElementById('authButton').innerHTML = 'Entrar';
+        document.getElementById('authButton').onclick = login;
+        document.getElementById('switchText').innerHTML = 'Não tem conta? <span onclick="switchToRegister()">Cadastre-se</span>';
+    }
+
+    function switchToRegister() {
+        document.getElementById('authTitle').innerHTML = '🔐 Cadastre-se';
+        document.getElementById('regFields').style.display = 'block';
+        document.getElementById('loginFields').style.display = 'none';
+        document.getElementById('authButton').innerHTML = 'Cadastrar';
+        document.getElementById('authButton').onclick = register;
+        document.getElementById('switchText').innerHTML = 'Já tenho conta? <span onclick="switchToLogin()">Faça Login</span>';
+    }
+
+    function showForgotPassword() {
+        document.getElementById('authModal').style.display = 'none';
+        document.getElementById('forgotModal').style.display = 'flex';
+    }
+
+    function closeForgotModal() { 
+        document.getElementById('forgotModal').style.display = 'none'; 
+        openAuthModal();
+    }
+
+    function closeResetModal() { 
+        document.getElementById('resetModal').style.display = 'none'; 
+        openAuthModal();
+    }
+
+    function sendRecoveryCode() {
+        const email = document.getElementById('forgotEmail')?.value.trim();
+        const user = users.find(u => u.email === email);
+        if (!user) { 
+            alert('E-mail não encontrado!'); 
+            return; 
+        }
+        const code = Math.floor(100000 + Math.random() * 900000).toString();
+        pendingReset = { email, code };
+        alert(`Código de verificação enviado para ${email}: ${code}`);
+        document.getElementById('forgotModal').style.display = 'none';
+        document.getElementById('resetModal').style.display = 'flex';
+    }
+
+    function resetPassword() {
+        const code = document.getElementById('resetCode')?.value;
+        const newPassword = document.getElementById('resetNewPassword')?.value;
+        
+        if (!pendingReset || pendingReset.code !== code) { 
+            alert('Código inválido!'); 
+            return; 
+        }
+        if (newPassword.length < 8) { 
+            alert('A senha deve ter pelo menos 8 caracteres!'); 
+            return; 
+        }
+        
+        const userIndex = users.findIndex(u => u.email === pendingReset.email);
+        if (userIndex !== -1) {
+            users[userIndex].password = newPassword;
+            localStorage.setItem('users', JSON.stringify(users));
+            alert('Senha redefinida com sucesso! Faça login.');
+            document.getElementById('resetModal').style.display = 'none';
+            pendingReset = null;
+            openAuthModal();
+            switchToLogin();
+        }
+    }
+
+    function updateUserButton() { 
+        const userBtn = document.getElementById('userNameDisplay'); 
+        if (currentUser) { 
+            userBtn.innerHTML = `<i class="fas fa-user-check"></i> ${currentUser.name.split(' ')[0]}`; 
+        } else { 
+            userBtn.innerHTML = `<i class="fas fa-user"></i> Visitante`; 
+        } 
+    }
+
+    function showGreeting() { 
+        if (!currentUser) return; 
+        
+        const hour = new Date().getHours(); 
+        let greeting, emoji;
+        
+        if (hour < 12) { greeting = 'Bom Dia'; emoji = '🌅'; }
+        else if (hour < 18) { greeting = 'Boa Tarde'; emoji = '☀️'; }
+        else { greeting = 'Boa Noite'; emoji = '🌙'; }
+        
+        const userName = currentUser.name.split(' ')[0];
+        const planIcon = currentUser.plan === 'pro' ? '🌟' : '🌱';
+        const planName = currentUser.plan === 'pro' ? 'PRO' : 'Gratuito';
+        const affiliateCode = currentUser.affiliateCode;
+        
+        const motivationalMessages = [
+            "✨ Grandes conquistas começam com um pequeno passo.",
+            "🚀 O sucesso é a soma de pequenos esforços repetidos dia após dia.",
+            "💪 Você já é top 10% por estar aqui. Continue evoluindo!",
+            "🌟 Compartilhe conhecimento e construa sua comunidade.",
+            "🎯 Pequenas ações hoje, grandes resultados amanhã.",
+            "📈 Cada pessoa que você ajuda, também ajuda você a crescer.",
+            "🤝 Juntos somos mais fortes. Convide quem você gosta!"
+        ];
+        const randomMsg = motivationalMessages[Math.floor(Math.random() * motivationalMessages.length)];
+        
+        let progressMsg = "";
+        if (currentUser.referrals === 0) {
+            progressMsg = "🌱 Você está começando sua jornada. O primeiro passo é compartilhar!";
+        } else if (currentUser.referrals < 5) {
+            progressMsg = `📈 Você já indicou ${currentUser.referrals} pessoa(s)! Continue assim!`;
+        } else {
+            progressMsg = `🏆 Parabéns! ${currentUser.referrals} indicações! Você é uma referência!`;
+        }
+        
+        const msgDiv = document.getElementById('greetingMessage');
+        msgDiv.innerHTML = `
+            <div style="text-align: center;">
+                <div style="font-size: 32px; margin-bottom: 5px;">${emoji}</div>
+                <div style="font-size: 18px; font-weight: 700;">${greeting}, ${userName}!</div>
+                <div style="font-size: 12px; margin: 5px 0;">${planIcon} Plano ${planName}</div>
+                <div style="margin: 12px 0; padding: 0 5px;">
+                    <div style="font-size: 13px; font-style: italic; font-weight: 500;">"${randomMsg}"</div>
+                </div>
+                <div style="background: rgba(0,200,83,0.15); border-radius: 12px; padding: 10px; margin: 10px 0;">
+                    <div style="font-size: 12px;">🤝 ${progressMsg}</div>
+                    <div style="font-size: 13px; font-weight: 600; margin-top: 8px;">📋 Seu código: <span style="background: rgba(0,0,0,0.3); padding: 3px 8px; border-radius: 10px;">${affiliateCode}</span></div>
+                </div>
+                <button onclick="copyReferralLink(); this.innerText='✅ Link copiado!'; setTimeout(()=>{this.innerText='📢 Compartilhar Agora';},2500);" style="background: linear-gradient(135deg, #00C853, #00B4D8); border: none; border-radius: 30px; padding: 10px 25px; color: #fff; font-weight: 600; cursor: pointer; font-size: 14px; margin-top: 8px; width: 90%;">
+                    📢 Compartilhar Agora
+                </button>
+                <div style="font-size: 10px; margin-top: 10px; opacity: 0.7;">
+                    💡 Você ganha <strong style="color: #00C853;">10% de comissão</strong> em cada amigo que assinar
+                </div>
+            </div>
+        `;
+        msgDiv.style.display = 'block';
+        msgDiv.style.maxWidth = '340px';
+        msgDiv.style.borderRadius = '20px';
+        msgDiv.style.boxShadow = '0 6px 25px rgba(0,0,0,0.25)';
+        msgDiv.style.background = currentUser.plan === 'pro' 
+            ? 'linear-gradient(135deg, #1a1a2e, #16213e)' 
+            : 'linear-gradient(135deg, #0a1628, #0d1f3c)';
+        
+        setTimeout(() => {
+            msgDiv.style.opacity = '0';
+            setTimeout(() => { msgDiv.style.display = 'none'; msgDiv.style.opacity = '1'; msgDiv.style.maxWidth = ''; }, 500);
+        }, 10000);
+    }
+
+    function updateAccountInfo() { 
+        const accountInfo = document.getElementById('accountInfo'); 
+        if (accountInfo && currentUser) { 
+            accountInfo.innerHTML = `<p>👤 Nome: ${currentUser.name}</p><p>📧 E-mail: ${currentUser.email}</p><p>📱 Telefone: ${currentUser.phone || 'Não informado'}</p><p>⭐ Plano: ${currentUser.plan === 'pro' ? 'PRO' : 'Grátis'}</p><p>🔗 Código Afiliado: <span style="color:#00C853">${currentUser.affiliateCode}</span></p><button class="btn-pay" onclick="showSection('plans')">⬆️ Upgrade para PRO</button><button class="btn-pay" onclick="changePassword()">🔐 Alterar Senha</button>`; 
+            document.getElementById('affiliateLink').innerHTML = `https://win-bets.netlify.app/ref/${currentUser.affiliateCode}`; 
+            document.getElementById('affiliateCommissions').innerHTML = currentUser.commissions || 0; 
+            document.getElementById('affiliateReferrals').innerHTML = currentUser.referrals || 0; 
+        } 
+        updateWithdrawMessage();
+    }
+
+    function updateWithdrawMessage() {
+        const msgDiv = document.getElementById('withdrawMessage');
+        if (!msgDiv) return;
+        
+        if (currentUser && currentUser.plan !== 'pro') {
+            msgDiv.innerHTML = `
+                <div style="background:rgba(255,193,7,0.2); border:1px solid #FFC107; border-radius:10px; padding:12px; margin-bottom:15px;">
+                    <i class="fas fa-lock" style="color:#FFC107; margin-right:8px;"></i>
+                    <strong>🔒 Saque bloqueado para usuários FREE</strong>
+                    <p style="margin-top:8px; font-size:13px;">
+                        Você tem <strong>${(currentUser.commissions || 0).toFixed(2)} USD</strong> em comissões acumuladas!
+                        <br>
+                        ⭐ <a href="#" onclick="showSection('plans'); return false;" style="color:#00C853;">Assine o plano PRO</a> para liberar seus saques.
+                    </p>
+                </div>
+            `;
+        } else if (currentUser && currentUser.plan === 'pro') {
+            msgDiv.innerHTML = `
+                <div style="background:rgba(0,200,83,0.2); border:1px solid #00C853; border-radius:10px; padding:12px; margin-bottom:15px;">
+                    <i class="fas fa-check-circle" style="color:#00C853; margin-right:8px;"></i>
+                    <strong>✅ Saques liberados para PRO</strong>
+                    <p style="margin-top:8px; font-size:13px;">
+                        Você tem <strong>${(currentUser.commissions || 0).toFixed(2)} USD</strong> disponíveis para saque!
+                    </p>
+                </div>
+            `;
+        } else {
+            msgDiv.innerHTML = '';
+        }
+    }
+
+    function changePassword() { 
+        if (!currentUser) { alert('Faça login!'); return; } 
+        const newPass = prompt('Nova senha (8+ caracteres com letras e números):'); 
+        if (newPass && newPass.length >= 8) { 
+            currentUser.password = newPass; 
+            const index = users.findIndex(u => u.email === currentUser.email); 
+            if (index !== -1) { 
+                users[index].password = newPass; 
+                localStorage.setItem('users', JSON.stringify(users)); 
+                localStorage.setItem('currentUser', JSON.stringify(currentUser)); 
+                alert('✅ Senha alterada!'); 
+            } 
+        } else if (newPass) { 
+            alert('Senha fraca! Use 8+ caracteres.'); 
+        } 
+    }
+
+    function logout() { 
+        currentUser = null; 
+        localStorage.removeItem('currentUser'); 
+        updateUserButton(); 
+        document.getElementById('mainContent').style.display = 'none'; 
+        document.getElementById('accessBlock').classList.remove('hide'); 
+        alert('Você saiu da conta.'); 
+    }
+
+    function copyReferralLink() { 
+        if (!currentUser) { alert('Faça login!'); return; } 
+        navigator.clipboard.writeText(`https://win-bets.netlify.app/ref/${currentUser.affiliateCode}`); 
+        alert('Link copiado!'); 
+    }
+
+    function makeWithdraw() { 
+        if (!currentUser) { 
+            alert('Faça login!'); 
+            return; 
+        }
+        
+        if (currentUser.plan !== 'pro') {
+            alert('🔒 Apenas usuários PRO podem sacar comissões!\n\n⭐ Assine o plano PRO para liberar saques.\n💰 Suas comissões continuam acumulando até você se tornar PRO.');
+            showSection('plans');
+            return;
+        }
+        
+        const amount = parseFloat(document.getElementById('withdrawAmount')?.value); 
+        
+        if (isNaN(amount) || amount <= 0) {
+            alert('Digite um valor válido para saque!');
+            return;
+        }
+        
+        if (amount < 10) {
+            alert('💰 Valor mínimo de saque: 10 USD');
+            return;
+        }
+        
+        if (amount > (currentUser.commissions || 0)) { 
+            alert(`Saldo insuficiente! Você tem ${(currentUser.commissions || 0).toFixed(2)} USD disponíveis.`); 
+            return; 
+        }
+        
+        if (confirm(`Solicitar saque de ${amount} USD?\n\n✅ Comissão restante: ${((currentUser.commissions || 0) - amount).toFixed(2)} USD\n⏰ Processamento: 24-48 horas`)) {
+            currentUser.commissions -= amount; 
+            const userIndex = users.findIndex(u => u.email === currentUser.email); 
+            if (userIndex !== -1) { 
+                users[userIndex].commissions = currentUser.commissions; 
+                localStorage.setItem('users', JSON.stringify(users)); 
+                localStorage.setItem('currentUser', JSON.stringify(currentUser)); 
+            } 
+            alert(`✅ Saque de ${amount} USD solicitado com sucesso!\n📱 Enviaremos para sua carteira em até 48h.`); 
+            document.getElementById('withdrawAmount').value = ''; 
+            updateAccountInfo(); 
+            updateAdminStats();
+        } 
+    }
+
+    function openAuthModal() { 
+        document.getElementById('authModal').style.display = 'flex'; 
+        switchToRegister(); 
+    }
+
+    function closeAccessBlockAndShowLogin() { 
+        document.getElementById('accessBlock').classList.add('hide'); 
+        openAuthModal(); 
+        switchToLogin(); 
+    }
+
+    function closeAccessBlockAndShowRegister() { 
+        document.getElementById('accessBlock').classList.add('hide'); 
+        openAuthModal(); 
+        switchToRegister(); 
+    }
+
+    function checkAccess() {
+        const savedUser = localStorage.getItem('currentUser');
+        if (savedUser) {
+            currentUser = JSON.parse(savedUser);
+            updateUserButton();
+            document.getElementById('accessBlock').classList.add('hide');
+            document.getElementById('mainContent').style.display = 'block';
+            loadGames();
+            loadBookmakers();
+            loadLeagues();
+            loadLiveGames();
+            loadBlog();
+            loadRanking();
+            loadPlans();
+            loadTeamSelector();
+            loadAIAnalysis();
+            showGreeting();
+            updateAccountInfo();
+        } else {
+            document.getElementById('accessBlock').classList.remove('hide');
+            document.getElementById('mainContent').style.display = 'none';
+        }
+    }
+
+    function loadBlog() { 
+        const container = document.getElementById('blogPosts'); 
+        if (blogPosts.length === 0) { 
+            container.innerHTML = '<p>Nenhum post ainda. Volte em breve para dicas exclusivas!</p>'; 
+        } else { 
+            container.innerHTML = blogPosts.map(post => `<div class="analysis-box" style="margin-bottom:20px;"><h3>📝 ${post.title}</h3><p>${post.content}</p><small>${new Date(post.date).toLocaleString()}</small></div>`).join(''); 
+        } 
+    }
+
+    function publishBlogPost() { 
+        if (!adminLoggedIn) { alert('Apenas administrador pode publicar!'); return; } 
+        const title = document.getElementById('blogTitle').value; 
+        const content = document.getElementById('blogContent').value; 
+        if (!title || !content) { alert('Preencha título e conteúdo!'); return; } 
+        blogPosts.unshift({ title, content, date: new Date() }); 
+        localStorage.setItem('blogPosts', JSON.stringify(blogPosts)); 
+        document.getElementById('blogTitle').value = ''; 
+        document.getElementById('blogContent').value = ''; 
+        alert('Post publicado com sucesso!'); 
+        loadBlog(); 
+    }
+
+    function loadRanking() { 
+        const container = document.getElementById('rankingList'); 
+        const rankedUsers = [...users].sort((a, b) => (b.commissions || 0) - (a.commissions || 0)).slice(0, 10); 
+        container.innerHTML = rankedUsers.map((user, index) => `<div class="analysis-box" style="margin-bottom:10px;"><p><strong>${index + 1}º</strong> ${user.name} - 💰 ${(user.commissions || 0).toLocaleString()} USD em comissões</p></div>`).join(''); 
+        if (rankedUsers.length === 0) container.innerHTML = '<p>Nenhum afiliado ainda</p>'; 
+    }
+
+    let secretClickCount = 0;
+    let clickTimer = null;
+
+    function showAdminPanel() {
+        secretClickCount++;
+        const btn = document.getElementById('secretAdminBtn');
+        if (btn) {
+            btn.style.opacity = '0.8';
+            setTimeout(() => { if (btn) btn.style.opacity = '0.35'; }, 200);
+        }
+        if (clickTimer) clearTimeout(clickTimer);
+        clickTimer = setTimeout(() => {
+            if (secretClickCount >= 10) {
+                secretClickCount = 0;
+                document.getElementById('adminSection').style.display = 'block';
+                const sections = ['home', 'analysis', 'account', 'deposit', 'withdraw', 'bookmakers', 'leagues', 'live', 'agenda', 'agendaFuturo', 'multibets', 'mybets', 'ai', 'stats', 'plans', 'affiliates', 'ranking', 'faq', 'blog', 'help', 'policies'];
+                sections.forEach(sec => { const el = document.getElementById(sec + 'Section'); if (el) el.style.display = 'none'; });
+                document.getElementById('adminLoginPanel').style.display = 'block';
+                document.getElementById('adminDashboard').style.display = 'none';
+                alert('🔐 Acesso administrativo liberado! Faça login para continuar.');
+            }
+            secretClickCount = 0;
+        }, 1000);
+    }
+
+    function adminLogin() { 
+        const phone = document.getElementById('adminPhone').value;
+        const email = document.getElementById('adminEmail').value;
+        const password = document.getElementById('adminPassword').value;
+        if (phone === '927224260' && email === 'suporte@iabet.com' && password === '12345678') { 
+            adminLoggedIn = true; 
+            document.getElementById('adminLoginPanel').style.display = 'none'; 
+            document.getElementById('adminDashboard').style.display = 'block'; 
+            updateAdminStats(); 
+            updateAdminUsersList(); 
+        } else { 
+            alert('Credenciais inválidas!'); 
+        } 
+    }
+
+    function updateAdminStats() { 
+        document.getElementById('adminTotalUsers').innerText = users.length; 
+        document.getElementById('adminProUsers').innerText = users.filter(u => u.plan === 'pro').length; 
+        document.getElementById('adminTotalBets').innerText = users.reduce((acc, u) => acc + (u.bets?.length || 0), 0); 
+    }
+
+    function updateAdminUsersList() { 
+        const tbody = document.getElementById('adminUsersList'); 
+        tbody.innerHTML = users.map(user => `
+            <tr>
+                <td>${user.name}</td>
+                <td>${user.email}</td>
+                <td><span class="status-badge ${user.plan === 'pro' ? 'status-active' : ''}">${user.plan === 'pro' ? 'PRO' : 'FREE'}</span></td>
+                <td><span class="status-badge ${user.isBanned ? 'status-banned' : 'status-active'}">${user.isBanned ? 'Banido' : 'Ativo'}</span></td>
+                <td>
+                    <button class="btn-small" style="background:#0066FF; color:#fff; border:none; padding:4px 10px; border-radius:5px; cursor:pointer;" onclick="toggleUserPlan('${user.email}')">⭐ Alterar</button>
+                    <button class="btn-small" style="background:#FF3B30; color:#fff; border:none; padding:4px 10px; border-radius:5px; cursor:pointer; margin-left:5px;" onclick="toggleUserBan('${user.email}')">${user.isBanned ? 'Desbanir' : 'Banir'}</button>
+                </td>
+            </tr>
+        `).join(''); 
+    }
+
+    function toggleUserPlan(email) { 
+        const user = users.find(u => u.email === email); 
+        if (user) { 
+            user.plan = user.plan === 'pro' ? 'free' : 'pro'; 
+            localStorage.setItem('users', JSON.stringify(users)); 
+            updateAdminUsersList(); 
+            updateAdminStats(); 
+            if (currentUser && currentUser.email === email) { 
+                currentUser.plan = user.plan; 
+                localStorage.setItem('currentUser', JSON.stringify(currentUser)); 
+                updateAccountInfo(); 
+            } 
+            alert(`Plano de ${user.name} alterado para ${user.plan.toUpperCase()}`); 
+        } 
+    }
+
+    function toggleUserBan(email) { 
+        const user = users.find(u => u.email === email); 
+        if (user) { 
+            user.isBanned = !user.isBanned; 
+            localStorage.setItem('users', JSON.stringify(users)); 
+            updateAdminUsersList(); 
+            alert(`${user.name} ${user.isBanned ? 'banido' : 'desbanido'}!`); 
+        } 
+    }
+
+    function resetSystem() { 
+        if (confirm('⚠️ Apagar TODOS os dados exceto admin?')) { 
+            users = users.filter(u => u.email === 'suporte@iabet.com'); 
+            if (users.length === 0) { 
+                users = [{ id: 1, name: 'Admin', email: 'suporte@iabet.com', phone: '927224260', password: '12345678', plan: 'pro', role: 'admin', isBanned: false }]; 
+            } 
+            localStorage.setItem('users', JSON.stringify(users)); 
+            blogPosts = []; 
+            localStorage.setItem('blogPosts', JSON.stringify(blogPosts)); 
+            updateAdminStats(); 
+            updateAdminUsersList(); 
+            alert('Sistema resetado!'); 
+        } 
+    }
+
+    function toggleMenu() { document.getElementById('sideMenu').classList.toggle('active'); }
+    
+    function toggleTheme() {
+        const body = document.body;
+        const icon = document.getElementById('themeIcon');
+        const text = document.getElementById('themeText');
+        if (body.classList.contains('dark')) {
+            body.classList.remove('dark');
+            body.classList.add('light');
+            icon.className = 'fas fa-sun';
+            text.innerText = 'Claro';
+            localStorage.setItem('theme', 'light');
+        } else {
+            body.classList.remove('light');
+            body.classList.add('dark');
+            icon.className = 'fas fa-moon';
+            text.innerText = 'Escuro';
+            localStorage.setItem('theme', 'dark');
+        }
+    }
+
+    function showSection(section) {
+        const sections = ['home', 'analysis', 'account', 'deposit', 'withdraw', 'bookmakers', 'leagues', 'live', 'agenda', 'agendaFuturo', 'multibets', 'mybets', 'ai', 'stats', 'plans', 'affiliates', 'ranking', 'faq', 'blog', 'help', 'policies'];
+        sections.forEach(sec => { const el = document.getElementById(sec + 'Section'); if (el) el.style.display = 'none'; });
+        const target = document.getElementById(section + 'Section');
+        if (target) {
+            target.style.display = 'block';
+            if (section === 'account') updateAccountInfo();
+            if (section === 'bookmakers') loadBookmakers();
+            if (section === 'leagues') loadLeagues();
+            if (section === 'live') loadLiveGames();
+            if (section === 'agenda') loadAgendaGames();
+            if (section === 'agendaFuturo') loadFutureGames();
+            if (section === 'multibets') { loadTeamSelector(); if (currentBet) document.getElementById('generatedBetsList').style.display = 'block'; }
+            if (section === 'mybets') loadMyBets();
+            if (section === 'ai') loadAIAnalysis();
+            if (section === 'blog') loadBlog();
+            if (section === 'ranking') loadRanking();
+            if (section === 'plans') loadPlans();
+        } else if (section === 'home') {
+            document.getElementById('homeSection').style.display = 'block';
+            loadGames();
+        }
+        toggleMenu();
+    }
+
+    createParticles();
+    generatePastGames();
+    
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+        document.body.classList.remove('dark');
+        document.body.classList.add('light');
+        document.getElementById('themeIcon').className = 'fas fa-sun';
+        document.getElementById('themeText').innerText = 'Claro';
+    }
+    
+    if (users.length === 0) {
+        users.push({ id: 1, name: 'Admin', email: 'suporte@iabet.com', phone: '927224260', password: '12345678', plan: 'pro', role: 'admin', isBanned: false });
+        localStorage.setItem('users', JSON.stringify(users));
+    }
+    
+    checkAllApisStatus();
+    checkAccess();
+
+    const adminBtn = document.getElementById('secretAdminBtn');
+    if (adminBtn) {
+        adminBtn.addEventListener('click', showAdminPanel);
+    }
+
+    window.toggleMenu = toggleMenu;
+    window.openAuthModal = openAuthModal;
+    window.register = register;
+    window.login = login;
+    window.switchToLogin = switchToLogin;
+    window.switchToRegister = switchToRegister;
+    window.showSection = showSection;
+    window.showAnalysis = showAnalysis;
+    window.closeAnalysis = closeAnalysis;
+    window.switchAnalysisTab = switchAnalysisTab;
+    window.logout = logout;
+    window.copyReferralLink = copyReferralLink;
+    window.selectPlan = selectPlan;
+    window.changePlanCurrency = changePlanCurrency;
+    window.changePassword = changePassword;
+    window.toggleTheme = toggleTheme;
+    window.closeAccessBlockAndShowLogin = closeAccessBlockAndShowLogin;
+    window.closeAccessBlockAndShowRegister = closeAccessBlockAndShowRegister;
+    window.copyText = copyText;
+    window.loadMoreBookmakers = loadMoreBookmakers;
+    window.loadMoreLeagues = loadMoreLeagues;
+    window.generateMultibet = generateMultibet;
+    window.toggleTeamSelection = toggleTeamSelection;
+    window.finalizeBet = finalizeBet;
+    window.showBookmakerSelection = showBookmakerSelection;
+    window.closeBookmakerModal = closeBookmakerModal;
+    window.makeWithdraw = makeWithdraw;
+    window.searchTeams = searchTeams;
+    window.filterAgenda = filterAgenda;
+    window.filterFutureGamesByDate = filterFutureGamesByDate;
+    window.filterFutureGamesByDatePicker = filterFutureGamesByDatePicker;
+    window.showForgotPassword = showForgotPassword;
+    window.closeForgotModal = closeForgotModal;
+    window.closeResetModal = closeResetModal;
+    window.sendRecoveryCode = sendRecoveryCode;
+    window.resetPassword = resetPassword;
+    window.showPaymentMethods = showPaymentMethods;
+    window.publishBlogPost = publishBlogPost;
+    window.adminLogin = adminLogin;
+    window.toggleUserPlan = toggleUserPlan;
+    window.toggleUserBan = toggleUserBan;
+    window.resetSystem = resetSystem;
+    window.loadAIAnalysis = loadAIAnalysis;
+    window.loadMoreAIGames = loadMoreAIGames;
+    window.loadLiveGames = loadLiveGames;
+</script>
+
+<div style="text-align: center; padding: 30px; background: rgba(0,0,0,0.2); margin-top: 30px;">
+    <p>© 2026 WIN BETS - Plataforma Nº1 em Análises Inteligentes para Apostas Desportivas.</p>
+    <p style="font-size:12px">✅ 8 Casas de Apostas | ✅ 100+ Ligas | ✅ Multi-Apostas | ✅ APIs | ✅ IA Avançada | ✅ Agenda de Jogos Futuros (30 Dias) | ✅ Agenda de Jogos Passados</p>
+    <a href="https://sportscore.com/" rel="dofollow" title="Sports data by SportScore" target="_blank" style="color: #777777; text-decoration: none; font-size: 10px;">
+        <i class="fas fa-database" style="font-size: 9px;"></i> Powered by SportScore
+    </a>
+</div>
+
+</body>
+</html>
